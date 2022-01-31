@@ -9,6 +9,8 @@ namespace ToHellAndBack.Dungeon.Cells
 {
     public class EmptyRoom : BaseRoom
     {
+        public override string RoomName => "Пустышка";
+
         public override void ChapterStepToTheRoom(Hero hero, Action extraAction = null)
         {
             //Yep, empty room. Nothing happens

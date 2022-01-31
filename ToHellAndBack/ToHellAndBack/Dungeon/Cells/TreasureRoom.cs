@@ -9,6 +9,8 @@ namespace ToHellAndBack.Dungeon.Cells
 {
     public class TreasureRoom : BaseRoom
     {
+        public override string RoomName => "Сокровищница";
+
         public int CoinsCount { get; set; }
 
         public TreasureRoom(int coinsCount)

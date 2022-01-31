@@ -22,7 +22,7 @@ namespace ToHellAndBack
             var lvl = 1;
             do
             {
-                game.GoToLevel(lvl);
+                game.ResearchLevel(lvl);
                 lvl++;
             } while (helper.IsGamerAgree());
 

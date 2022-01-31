@@ -27,17 +27,18 @@ namespace ToHellAndBack
             ConsoleHelper.UpdateHeroStats(CurrentHero, 0);
         }
 
-        public void GoToLevel(int level)
+        public void ResearchLevel(int level)
         {
             SwitchToLevel(level);
             ConsoleHelper.NarratorSad($"Герой спустился на уровень {level}");
 
             while(CurrentLevel.Rooms.Any())
             {
-                ConsoleHelper.NarratorSad($"Герой изучил комнату");
                 CurrentHero.Stamina--;
                 var cell = CurrentLevel.Rooms.Pop();
                 cell.ChapterStepToTheRoom(CurrentHero);
+                ConsoleHelper.NarratorSad($"Герой изучил комнату '{cell.RoomName}'");
+                ConsoleHelper.UpdateHeroStats(CurrentHero, CurrentLevel.LevelNumber);
             }
 
             ConsoleHelper.HeroSad($"Ну вот я и закончил зачищать этот уровень");
