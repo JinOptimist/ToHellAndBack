@@ -88,16 +88,25 @@ namespace ToHellAndBack
                 rooms.Add(emptyRoom);
             }
 
+            Shuffle(rooms);
+
+
             dungeonLevel.Rooms = new Stack<BaseRoom>(rooms);
 
             return dungeonLevel;
         }
 
-        private void SpendStamin(int staminaSpend = 1)
+        private void Shuffle(List<BaseRoom> rooms)
         {
-            CurrentHero.Stamina -= staminaSpend;
-            ConsoleHelper.NarratorSad($"Герой устаёт. -{staminaSpend} выносливости");
-            ConsoleHelper.UpdateHeroStats(CurrentHero, CurrentLevel.LevelNumber);
+            for (int i = 0; i < rooms.Count * 2; i++)
+            {
+                var firstIndex = _random.Next(0, rooms.Count);
+                var secondIndex = _random.Next(0, rooms.Count);
+
+                var temp = rooms[firstIndex];
+                rooms[firstIndex] = rooms[secondIndex];
+                rooms[secondIndex] = temp;
+            }
         }
 
         public void GetCoin(int coinCount = 1)
