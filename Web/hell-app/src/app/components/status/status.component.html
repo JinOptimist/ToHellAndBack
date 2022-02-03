@@ -1,7 +1,8 @@
-<p>Hero {{hero.name}}</p>
-<div>
-    <input type="button" value="move"  (click)='doIt()'/>
-  </div>
-  <div class="result">
-    {{ hero.coins }}
-  </div>
+<div class="status-bar">
+    <div class="info-block hero-name">
+        Имя: {{hero.name}}
+    </div>
+    <div class="info-block coins">
+        Золото: {{ hero.coins }}
+    </div>
+</div>

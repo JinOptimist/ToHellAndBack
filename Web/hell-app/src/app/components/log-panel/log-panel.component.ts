@@ -3,13 +3,12 @@ import { IHero } from 'src/app/models/IHero';
 import { firebaseHelper } from 'src/app/services/dbHelper';
 
 @Component({
-  selector: 'app-status',
-  templateUrl: './status.component.html',
-  styleUrls: ['./status.component.scss']
+  selector: 'app-log-panel',
+  templateUrl: './log-panel.component.html',
+  styleUrls: ['./log-panel.component.scss']
 })
-
-export class StatusComponent implements OnInit {
-  hero: IHero;
+export class LogPanelComponent implements OnInit {
+  public hero: IHero;
 
   constructor(private helper:firebaseHelper) {
     this.hero = helper.GetHero();
