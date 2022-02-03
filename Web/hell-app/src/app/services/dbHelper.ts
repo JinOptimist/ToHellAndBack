@@ -10,7 +10,8 @@ export class firebaseHelper {
     constructor() {
         this.hero = <IHero>{
             name: 'Conan',
-            coins: 1
+            coins: 1,
+            stamina: 100
         };
     }
 

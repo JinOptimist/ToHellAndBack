@@ -1,3 +1,8 @@
-<p>log-panel works!</p>
-<div>Hi, {{ hero.name }}</div>
-<div>You have {{ hero.coins }} coins</div>
+<div>
+    <div 
+        class="message" 
+        ng-repeat="oneMessage in messages">
+        {{messages}}
+    </div>
+    <input type="button" value="обновить логи" (click)='udpate()'>
+</div>
