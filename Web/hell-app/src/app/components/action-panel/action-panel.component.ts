@@ -10,18 +10,21 @@ import { MazeBuilder } from 'src/app/services/maze/mazeBuilder';
   styleUrls: ['./action-panel.component.scss']
 })
 export class ActionPanelComponent implements OnInit {
-  public hero: IHero;
+  public hero!: IHero;
   private currentLevel: number;
 
   constructor(
     private firebaseHelper: FirebaseHelper,
     private mazeBuilder: MazeBuilder,
     private gameEventsService: GameEventsService) {
-    this.hero = firebaseHelper.GetHero();
+    //this.hero = firebaseHelper.GetHero();
     this.currentLevel = 0;
   }
 
   ngOnInit(): void {
+    this.firebaseHelper.GetHeroAsync().then(data=>{
+      this.hero = data.val();
+    })
   }
 
   public GoDeep(): void {
@@ -43,7 +46,7 @@ export class ActionPanelComponent implements OnInit {
     this.currentLevel--;
   }
 
-  public CreateHero(){
+  public SaveHero(){
     this.firebaseHelper.CreateHero();
   }
 }

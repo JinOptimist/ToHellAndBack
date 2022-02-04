@@ -1,22 +1,37 @@
 import { IHero } from "../models/IHero";
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { Database, get, getDatabase, onValue, ref, set } from "firebase/database";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class FirebaseHelper {
-    private hero: IHero;
-
+    private hero!: IHero;
+    private db: Database;
 
     constructor() {
+        this.db = getDatabase();
+        const heroName = 'Conan';
+        const refToCollection = ref(this.db, 'heroes/' + heroName);
+        
         this.hero = <IHero>{
             name: 'Conan',
             coins: 0,
             stamina: 100
         };
+        
+        //Read once
+        get(refToCollection).then(snapShot => {
+            this.hero = snapShot.val();
+        });
+        
+        //read and update onLive
+        // onValue(refToCollection, (snapshot) => {
+        //     const data = snapshot.val();
+        // });
+
 
         // const firebaseConfig = {
         //     apiKey: "AIzaSyAfofIX36nawbTwCZdIGOBGq4jqlOvj5M4",
@@ -31,9 +46,14 @@ export class FirebaseHelper {
 
     GetHero = () => this.hero;
 
-    CreateHero(){
-        const db = getDatabase();
-        const refToCollection = ref(db, 'heroes/' + this.hero.name);
+    GetHeroAsync () {
+        const heroName = 'Conan';
+        const refToCollection = ref(this.db, 'heroes/' + heroName);
+        return get(refToCollection);
+    };
+
+    CreateHero() {
+        const refToCollection = ref(this.db, 'heroes/' + this.hero.name);
         set(refToCollection, this.hero);
     }
 }

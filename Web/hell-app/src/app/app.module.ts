@@ -8,17 +8,23 @@ import { AppComponent } from './app.component';
 import { ActionPanelComponent } from './components/action-panel/action-panel.component';
 import { LogPanelComponent } from './components/log-panel/log-panel.component';
 import { StatusComponent } from './components/status/status.component';
+import { LoginComponent } from './components/login/login.component';
+import { GameComponent } from './components/game/game.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     StatusComponent,
     ActionPanelComponent,
-    LogPanelComponent
+    LogPanelComponent,
+    LoginComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

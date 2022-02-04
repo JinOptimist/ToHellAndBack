@@ -9,12 +9,16 @@ import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 })
 
 export class StatusComponent implements OnInit {
-  hero: IHero;
+  hero!: IHero;
 
-  constructor(private helper:FirebaseHelper) {
-    this.hero = helper.GetHero();
+  constructor(private helper: FirebaseHelper) {
+    //this.hero = helper.GetHero();
   }
 
   ngOnInit(): void {
+    this.helper.GetHeroAsync()
+      .then(data => {
+        this.hero = data.val();
+      })
   }
 }
