@@ -17,14 +17,14 @@ export class ActionPanelComponent implements OnInit {
     private firebaseHelper: FirebaseHelper,
     private mazeBuilder: MazeBuilder,
     private gameEventsService: GameEventsService) {
-    //this.hero = firebaseHelper.GetHero();
+    this.hero = firebaseHelper.GetHero();
     this.currentLevel = 0;
   }
 
   ngOnInit(): void {
-    this.firebaseHelper.GetHeroAsync().then(data=>{
-      this.hero = data.val();
-    })
+    // this.firebaseHelper.GetHeroAsync().then(data=>{
+    //   this.hero = data.val();
+    // });
   }
 
   public GoDeep(): void {

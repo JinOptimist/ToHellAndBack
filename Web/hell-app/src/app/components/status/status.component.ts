@@ -12,13 +12,13 @@ export class StatusComponent implements OnInit {
   hero!: IHero;
 
   constructor(private helper: FirebaseHelper) {
-    //this.hero = helper.GetHero();
+    this.hero = helper.GetHero();
   }
 
   ngOnInit(): void {
-    this.helper.GetHeroAsync()
-      .then(data => {
-        this.hero = data.val();
-      })
+    // this.helper.GetHeroAsync()
+    //   .then(data => {
+    //     this.hero = data.val();
+    //   });
   }
 }
