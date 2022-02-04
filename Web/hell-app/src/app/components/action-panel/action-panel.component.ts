@@ -14,10 +14,10 @@ export class ActionPanelComponent implements OnInit {
   private currentLevel: number;
 
   constructor(
-    private helper: FirebaseHelper,
+    private firebaseHelper: FirebaseHelper,
     private mazeBuilder: MazeBuilder,
     private gameEventsService: GameEventsService) {
-    this.hero = helper.GetHero();
+    this.hero = firebaseHelper.GetHero();
     this.currentLevel = 0;
   }
 
@@ -41,5 +41,9 @@ export class ActionPanelComponent implements OnInit {
     console.log('go back');
     this.hero.stamina--;
     this.currentLevel--;
+  }
+
+  public CreateHero(){
+    this.firebaseHelper.CreateHero();
   }
 }
