@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
-import { firebaseHelper } from 'src/app/services/dbHelper';
+import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { GameEventsService } from 'src/app/services/GameEventsService';
 
 @Component({
@@ -13,7 +13,7 @@ export class LogPanelComponent implements OnInit {
   messages: string[];
 
   constructor(
-    private helper:firebaseHelper,
+    private helper:FirebaseHelper,
     private gameEventsService: GameEventsService) {
     this.hero = helper.GetHero();
     this.messages = gameEventsService.GetAllEventsMessage();

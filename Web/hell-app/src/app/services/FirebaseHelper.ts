@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 
-export class firebaseHelper {
+export class FirebaseHelper {
     private hero: IHero;
     constructor() {
         this.hero = <IHero>{
             name: 'Conan',
-            coins: 1,
+            coins: 0,
             stamina: 100
         };
     }

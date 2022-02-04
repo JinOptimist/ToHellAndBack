@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
-import { firebaseHelper } from 'src/app/services/dbHelper';
+import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 
 @Component({
   selector: 'app-status',
@@ -11,7 +11,7 @@ import { firebaseHelper } from 'src/app/services/dbHelper';
 export class StatusComponent implements OnInit {
   hero: IHero;
 
-  constructor(private helper:firebaseHelper) {
+  constructor(private helper:FirebaseHelper) {
     this.hero = helper.GetHero();
   }
 

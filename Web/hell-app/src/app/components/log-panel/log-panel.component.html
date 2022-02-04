@@ -1,8 +1,5 @@
 <div>
-    <div 
-        class="message" 
-        ng-repeat="oneMessage in messages">
-        {{messages}}
+    <div class="message" *ngFor="let oneMessage of this.messages">
+        {{oneMessage}}
     </div>
-    <input type="button" value="обновить логи" (click)='udpate()'>
 </div>
