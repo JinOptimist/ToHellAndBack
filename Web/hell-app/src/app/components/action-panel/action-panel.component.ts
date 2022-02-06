@@ -22,8 +22,8 @@ export class ActionPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.firebaseHelper.GetHeroAsync().then(data=>{
-    //   this.hero = data.val();
+    // this.firebaseHelper.GetHeroAsync().then(hero => {
+    //   this.hero = hero;
     // });
   }
 
@@ -46,7 +46,7 @@ export class ActionPanelComponent implements OnInit {
     this.currentLevel--;
   }
 
-  public SaveHero(){
-    this.firebaseHelper.CreateHero();
+  public SaveHero() {
+    this.firebaseHelper.SaveHero();
   }
 }

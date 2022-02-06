@@ -2,6 +2,7 @@ import { IHero } from "../models/IHero";
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { Database, get, getDatabase, onValue, ref, set } from "firebase/database";
+import { Action } from "rxjs/internal/scheduler/Action";
 
 @Injectable({
     providedIn: 'root'
@@ -49,10 +50,32 @@ export class FirebaseHelper {
     GetHeroAsync () {
         const heroName = 'Conan';
         const refToCollection = ref(this.db, 'heroes/' + heroName);
-        return get(refToCollection);
-    };
+        
+        //get only once
+        var dataPromise = get(refToCollection);
 
-    CreateHero() {
+        //var dataPromise = onValue(refToCollection);
+        var heroPromise = new Promise<IHero>((resolve, reject) => {
+            dataPromise.then((data) => {
+                const hero:IHero = data.val() as IHero;
+                resolve(hero);
+            }, reject);
+          });
+        return heroPromise;
+    }
+
+    SubscribeToUpdateHero (onHeroUpdate: (h: IHero) => void){
+        const heroName = 'Conan';
+        const refToCollection = ref(this.db, 'heroes/' + heroName);
+        
+        onValue(refToCollection, 
+            (data) => {
+                const hero:IHero = data.val() as IHero;
+                onHeroUpdate(hero);
+            });
+    }
+
+    SaveHero() {
         const refToCollection = ref(this.db, 'heroes/' + this.hero.name);
         set(refToCollection, this.hero);
     }

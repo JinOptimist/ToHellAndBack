@@ -17,8 +17,12 @@ export class StatusComponent implements OnInit {
 
   ngOnInit(): void {
     // this.helper.GetHeroAsync()
-    //   .then(data => {
-    //     this.hero = data.val();
+    //   .then(hero => {
+    //     this.hero = hero;
     //   });
+    this.helper.SubscribeToUpdateHero(
+      (hero) => {
+        this.hero = hero;
+      });
   }
 }
