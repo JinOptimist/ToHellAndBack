@@ -9,8 +9,8 @@ import { HeroService } from 'src/app/services/HeroService';
 })
 
 export class LoginComponent implements OnInit {
-  public heroName!: string;
-  public error!: string;
+  public heroName: string = "Conan";
+  public error: string;
   //public password!: string;
 
   constructor(

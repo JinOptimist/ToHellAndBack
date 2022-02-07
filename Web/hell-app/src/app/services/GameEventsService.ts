@@ -1,10 +1,13 @@
-import { Injectable } from "@angular/core";
+import { formatDate } from "@angular/common";
+import { Inject, Injectable, LOCALE_ID } from "@angular/core";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class GameEventsService {
+    constructor(@Inject(LOCALE_ID) private locale: string){}
+
     private messages: string[] = [];
 
     public GetAllEventsMessage() {
@@ -12,6 +15,8 @@ export class GameEventsService {
     }
 
     public StoreAllEventsMessage(message: string): void {
-        this.messages.push(message);
+        const now = new Date();
+        const formatedTime = formatDate(now, "mm:ss", this.locale);
+        this.messages.push(`${formatedTime} - ${message}`);
     }
 }
