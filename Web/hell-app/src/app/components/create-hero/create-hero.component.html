@@ -1,10 +1,11 @@
 <div>
     <mat-form-field appearance="fill">
-        <mat-label>Hero name</mat-label>
-        <input matInput [(ngModel)]="heroName" placeholder="Example: Conan" />
+        <mat-label>Имя героя</mat-label>
+        <input matInput [(ngModel)]="heroName" placeholder="Например: Конан" />
     </mat-form-field>
 </div>
 <div>
+    Сколько у героя монет было с самого начала:
     <mat-button-toggle-group [(ngModel)]="heroStartCoins" aria-label="Font Style">
         <mat-button-toggle 
             *ngFor="let startCoinOption of startCoinOptions" 
@@ -14,7 +15,7 @@
     </mat-button-toggle-group>
 </div>
 <div>
-    <button mat-raised-button (click)="createHero()">Create</button>
+    <button mat-raised-button (click)="createHero()">Создать</button>
 </div>
 <div>
     {{error}}

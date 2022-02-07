@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class CreateHeroComponent implements OnInit {
   heroStartCoins: number;
   heroName: string;
-  startCoinOptions: number[] = [100, 150, 50];
+  startCoinOptions: number[] = [250, 150, 100, 50, 0];
   error: string;
 
   constructor(

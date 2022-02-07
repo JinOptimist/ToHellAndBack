@@ -21,14 +21,20 @@ export class HeroService implements IHeroObserver {
         return this.firebaseHelper
             .SaveHero(hero)
             .then(() => {
-                this.hero = this.CreateHeroByInterface(hero);
+                if (!!hero) {
+                    this.hero = this.CreateHeroByInterface(hero);
+                }
             });
     }
 
-    public LoadHero(heroName: string): Promise<IHero> {
+    public LoadHero(heroName: string): Promise<IHero | undefined> {
         return this.firebaseHelper
             .GetHeroAsync(heroName)
             .then(hero => {
+                if (!hero) {
+                    return undefined;
+                }
+
                 const heroWithSubscribtion: Hero =
                     this.CreateHeroByInterface(hero);
                 this.hero = heroWithSubscribtion;
