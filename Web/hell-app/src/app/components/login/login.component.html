@@ -1,5 +1,8 @@
 <div>
-    <input type="text" [(ngModel)]="email" placeholder="Email">
-    <input type="password" [(ngModel)]="password" placeholder="password">
-    <input type="button" value="Login" (click)="login()">
+    <input type="text" [(ngModel)]="heroName" placeholder="Hero name (Conan)">
+    <!-- <input type="password" [(ngModel)]="password" placeholder="password"> -->
+    <input type="button" value="Login" (click)="getHero()">
+</div>
+<div>
+    {{error}}
 </div>

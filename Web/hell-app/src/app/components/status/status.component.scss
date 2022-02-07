@@ -18,17 +18,18 @@
         padding: 11px 23px;
         text-decoration: none;
         text-shadow: 0px -1px 0px #2b665e;
+        margin: 3px;
 
-        &.hero-name {
+        &.hero-name .value {
             color: red;
         }
-    
-        &.coins {
+
+        &.coins .value {
             color: rgb(241, 199, 11);
         }
 
-        &.stamina{
-            color:rgb(36, 6, 201)
+        &.stamina .value {
+            color: rgb(36, 6, 201);
         }
     }
 }

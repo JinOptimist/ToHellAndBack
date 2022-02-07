@@ -11,6 +11,9 @@ import { StatusComponent } from './components/status/status.component';
 import { LoginComponent } from './components/login/login.component';
 import { GameComponent } from './components/game/game.component';
 import { FormsModule } from '@angular/forms';
+import { CreateHeroComponent } from './components/create-hero/create-hero.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioButton } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { FormsModule } from '@angular/forms';
     ActionPanelComponent,
     LogPanelComponent,
     LoginComponent,
-    GameComponent
+    GameComponent,
+    CreateHeroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    BrowserAnimationsModule,
+    //MatRadioButton//mat-radio-button
   ],
   providers: [],
   bootstrap: [AppComponent]

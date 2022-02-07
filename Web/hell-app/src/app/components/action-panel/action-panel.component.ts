@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { GameEventsService } from 'src/app/services/GameEventsService';
+import { HeroService } from 'src/app/services/HeroService';
 import { MazeBuilder } from 'src/app/services/maze/mazeBuilder';
 
 @Component({
@@ -14,17 +15,15 @@ export class ActionPanelComponent implements OnInit {
   private currentLevel: number;
 
   constructor(
-    private firebaseHelper: FirebaseHelper,
     private mazeBuilder: MazeBuilder,
-    private gameEventsService: GameEventsService) {
-    this.hero = firebaseHelper.GetHero();
+    private gameEventsService: GameEventsService,
+    private heroService: HeroService) {
+
     this.currentLevel = 0;
   }
 
   ngOnInit(): void {
-    // this.firebaseHelper.GetHeroAsync().then(hero => {
-    //   this.hero = hero;
-    // });
+    this.hero = this.heroService.GetCurrentHero();
   }
 
   public GoDeep(): void {
@@ -47,6 +46,6 @@ export class ActionPanelComponent implements OnInit {
   }
 
   public SaveHero() {
-    this.firebaseHelper.SaveHero();
+    this.heroService.SaveCurrentHero();
   }
 }

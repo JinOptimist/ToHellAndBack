@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeroService } from './services/HeroService';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'hell name from app component ts';
+  isLoading: boolean = true;
+  isHero: boolean = false;
+
+  constructor(private heroService: HeroService){
+    this.isLoading = !!heroService.GetCurrentHero();
+  }
 }

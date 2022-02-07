@@ -1,12 +1,12 @@
 <div class="status-bar" *ngIf="(!!hero)">
     <div class="info-block hero-name">
-        Имя: {{hero.name}}
+        Имя: <span class="value">{{hero.name}}</span>
     </div>
     <div class="info-block stamina">
-        Выносливость: {{ hero.stamina }}
+        Выносливость: <span class="value">{{ hero.stamina }}</span>
     </div>
     <div class="info-block coins">
-        Золото: {{ hero.coins }}
+        Золото: <span class="value">{{ hero.coins }}</span>
     </div>
 </div>
 <div *ngIf="(!hero)">

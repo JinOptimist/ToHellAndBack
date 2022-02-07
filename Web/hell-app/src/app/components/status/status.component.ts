@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
+import { HeroService } from 'src/app/services/HeroService';
 
 @Component({
   selector: 'app-status',
@@ -11,18 +12,10 @@ import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 export class StatusComponent implements OnInit {
   hero!: IHero;
 
-  constructor(private helper: FirebaseHelper) {
-    this.hero = helper.GetHero();
+  constructor(private heroService: HeroService) {
   }
 
   ngOnInit(): void {
-    // this.helper.GetHeroAsync()
-    //   .then(hero => {
-    //     this.hero = hero;
-    //   });
-    this.helper.SubscribeToUpdateHero(
-      (hero) => {
-        this.hero = hero;
-      });
+    this.hero = this.heroService.GetCurrentHero();
   }
 }

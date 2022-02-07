@@ -1,0 +1,16 @@
+<div>
+    <input type="text" [(ngModel)]="heroName" placeholder="Hero name (ex. Conan)">
+</div>
+<div>
+    <select [(ngModel)]="heroStartCoins">
+        <option *ngFor="let startCoinOption of startCoinOptions" [value]="startCoinOption">
+            {{startCoinOption}}
+        </option>
+    </select>
+</div>
+<div>
+    <input type="button" value="Create" (click)="createHero()">
+</div>
+<div>
+    {{error}}
+</div>
