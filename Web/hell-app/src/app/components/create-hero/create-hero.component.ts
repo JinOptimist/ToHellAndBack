@@ -22,11 +22,13 @@ export class CreateHeroComponent implements OnInit {
   }
 
   public createHero() {
+    //console.log(this.heroStartCoins);
     let hero = <IHero>{
       name: this.heroName,
       coins: this.heroStartCoins - 0,
-      stamina: 300 - this.heroStartCoins
-    }
+      stamina: 300 - this.heroStartCoins,
+      maxStamina: 300 - this.heroStartCoins
+    };
     this.heroService.CreateHero(hero).then(() => {
       this.router.navigateByUrl("/game");
     });

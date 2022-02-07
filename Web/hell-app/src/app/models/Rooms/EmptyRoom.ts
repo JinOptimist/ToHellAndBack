@@ -5,7 +5,7 @@ export class EmptyRoom extends BaseRooms {
     roomName: string = "Пустая комната";
 
     exploreRoom(hero: IHero): void {
-        console.log('do nothing');
+        //do nothing
         hero.stamina--;
     }
 }

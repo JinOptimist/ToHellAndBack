@@ -1,7 +1,7 @@
 import { IHero } from "../models/IHero";
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { Database, get, getDatabase, onValue, ref, set } from "firebase/database";
+import { Database, get, getDatabase, onValue, ref, remove, set } from "firebase/database";
 import { Action } from "rxjs/internal/scheduler/Action";
 import { from, Observable } from "rxjs";
 
@@ -47,6 +47,11 @@ export class FirebaseHelper {
     SaveHero(hero: IHero): Promise<void> {
         const refToCollection = ref(this.db, 'heroes/' + hero.name);
         return set(refToCollection, hero);
+    }
+
+    KillHero(hero: IHero): void {
+        const refToCollection = ref(this.db, 'heroes/' + hero.name);
+        remove(refToCollection);
     }
 }
 

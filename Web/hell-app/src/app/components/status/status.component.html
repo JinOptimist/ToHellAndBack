@@ -4,6 +4,9 @@
     </div>
     <div class="info-block stamina">
         Выносливость: <span class="value">{{ hero.stamina }}</span>
+        <mat-progress-bar 
+            mode="determinate" 
+            [value]="hero.stamina / hero.maxStamina * 100"></mat-progress-bar>
     </div>
     <div class="info-block coins">
         Золото: <span class="value">{{ hero.coins }}</span>

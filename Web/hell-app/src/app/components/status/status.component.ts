@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
-import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { HeroService } from 'src/app/services/HeroService';
 
 @Component({
@@ -11,11 +10,13 @@ import { HeroService } from 'src/app/services/HeroService';
 
 export class StatusComponent implements OnInit {
   hero!: IHero;
+  staminPercent: number;
 
   constructor(private heroService: HeroService) {
   }
 
   ngOnInit(): void {
     this.hero = this.heroService.GetCurrentHero();
+    this.staminPercent = this.hero.stamina / this.hero.maxStamina * 100;
   }
 }

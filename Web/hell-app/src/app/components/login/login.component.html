@@ -1,7 +1,9 @@
 <div>
-    <input type="text" [(ngModel)]="heroName" placeholder="Hero name (Conan)">
-    <!-- <input type="password" [(ngModel)]="password" placeholder="password"> -->
-    <input type="button" value="Login" (click)="getHero()">
+    <mat-form-field appearance="fill">
+        <mat-label>Hero name</mat-label>
+        <input matInput [(ngModel)]="heroName" placeholder="Example: Conan" />
+    </mat-form-field>
+    <button mat-raised-button (click)="getHero()">Choose the hero</button>
 </div>
 <div>
     {{error}}

@@ -13,7 +13,13 @@ import { GameComponent } from './components/game/game.component';
 import { FormsModule } from '@angular/forms';
 import { CreateHeroComponent } from './components/create-hero/create-hero.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatRadioButton } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { DeadComponent } from './components/dead/dead.component';
+
 
 @NgModule({
   declarations: [
@@ -23,19 +29,26 @@ import { MatRadioButton } from '@angular/material/radio';
     LogPanelComponent,
     LoginComponent,
     GameComponent,
-    CreateHeroComponent
+    CreateHeroComponent,
+    DeadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    //MatRadioButton//mat-radio-button
+
+    // Material
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   firebaseConfig = {
     apiKey: "AIzaSyAfofIX36nawbTwCZdIGOBGq4jqlOvj5M4",
     authDomain: "tohellandback-9df27.firebaseapp.com",
@@ -45,7 +58,7 @@ export class AppModule {
     appId: "1:683538521009:web:b0ee2ee365fb416d38bb90"
   };
 
-  constructor(){
+  constructor() {
     const app = initializeApp(this.firebaseConfig);
   }
 }

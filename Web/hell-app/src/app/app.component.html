@@ -1,8 +1,8 @@
 <nav class="top-menu">
     <ul *ngIf="(!isLoading)">
-        <li><a routerLink="/getHero">get hero</a></li>
-        <li><a routerLink="/createHero">create hero</a></li>
-        <li><a routerLink="/game">game</a></li>
+        <li><a mat-raised-button href="/getHero">get hero</a></li>
+        <li><a mat-raised-button routerLink="/createHero">create hero</a></li>
+        <li><a mat-raised-button routerLink="/game">game</a></li>
     </ul>
     <span *ngIf="(!!isLoading)">
         isLoading
