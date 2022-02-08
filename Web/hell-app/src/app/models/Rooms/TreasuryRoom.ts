@@ -1,16 +1,13 @@
 import { IHero } from "../IHero";
 import { BaseRooms } from "./BaseRooms";
+import { RoomType } from "./RoomType";
 
 export class TreasuryRoom extends BaseRooms {
+    roomType: RoomType = RoomType.TreasuryRoom;
     roomName: string;
 
-    constructor(private coinsCount: number) { 
+    constructor(public coinsCount: number) { 
         super(); 
         this.roomName = `Сокровищница (+${coinsCount})`
-    }
-
-    exploreRoom(hero: IHero): void {
-        hero.coins += this.coinsCount;
-        hero.stamina--;
     }
 }

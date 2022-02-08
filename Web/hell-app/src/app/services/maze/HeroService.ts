@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { get, ref } from "firebase/database";
-import { Hero } from "../models/Hero";
-import { IHero } from "../models/IHero";
-import { FirebaseHelper } from "./FirebaseHelper";
+import { Hero } from "../../models/Hero";
+import { IHero } from "../../models/IHero";
+import { FirebaseHelper } from "../FirebaseHelper";
 import { IHeroObserver } from "./IHeroObserver";
 
 @Injectable({
@@ -35,8 +34,7 @@ export class HeroService implements IHeroObserver {
                     return undefined;
                 }
 
-                const heroWithSubscribtion: Hero =
-                    this.CreateHeroByInterface(hero);
+                const heroWithSubscribtion: Hero = this.CreateHeroByInterface(hero);
                 this.hero = heroWithSubscribtion;
                 return heroWithSubscribtion;
             });
@@ -58,6 +56,7 @@ export class HeroService implements IHeroObserver {
         heroWithSubscribtion.stamina = ihero.stamina;
         heroWithSubscribtion.maxStamina = ihero.maxStamina;
         heroWithSubscribtion.coins = ihero.coins;
+        heroWithSubscribtion.maze = ihero.maze;
 
         heroWithSubscribtion.AttachToHeroUpdating(this);
         return heroWithSubscribtion;
@@ -66,7 +65,7 @@ export class HeroService implements IHeroObserver {
     public HeroWasUpdated(hero: IHero): void {
         //check for death
         if (hero.stamina <= 0) {
-            this.firebaseHelper.KillHero(hero);
+            this.firebaseHelper.KillHero(hero.name);
             this.hero = undefined;
             this.router.navigateByUrl('/dead');
         }

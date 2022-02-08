@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
-import { HeroService } from 'src/app/services/HeroService';
+import { HeroService } from 'src/app/services/maze/HeroService';
 import { Router } from '@angular/router';
+import { MazeBuilder } from 'src/app/services/maze/mazeBuilder';
 
 @Component({
   selector: 'app-create-hero',
@@ -16,18 +17,20 @@ export class CreateHeroComponent implements OnInit {
 
   constructor(
     private heroService: HeroService,
+    private mazeBuilder: MazeBuilder,
     private router: Router) { }
 
   ngOnInit(): void {
   }
 
   public createHero() {
-    let hero = <IHero>{
+    const hero = <IHero>{
       name: this.heroName,
       coins: this.heroStartCoins - 0,
       stamina: 300 - this.heroStartCoins,
-      maxStamina: 300 - this.heroStartCoins
+      maxStamina: 300 - this.heroStartCoins,
     };
+    hero.maze = this.mazeBuilder.BuildMaze(hero);
     this.heroService
       .CreateHero(hero)
       .then(() => {

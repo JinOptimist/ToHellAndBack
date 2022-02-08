@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IHero } from 'src/app/models/IHero';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
-import { HeroService } from 'src/app/services/HeroService';
+import { HeroService } from 'src/app/services/maze/HeroService';
 
 @Component({
   selector: 'app-get-hero',
@@ -33,6 +33,14 @@ export class GetHeroComponent implements OnInit {
 
   chooseHero(heroName: string) {
     this.LoadHero(heroName);
+  }
+
+  kill(hero: IHero) {
+    this.firebaseHelper.KillHero(hero.name);
+    const index = this.savedHeroes.indexOf(hero, 0);
+    if (index > -1) {
+      this.savedHeroes.splice(index, 1);
+    }
   }
 
   private LoadHero(heroName: string) {

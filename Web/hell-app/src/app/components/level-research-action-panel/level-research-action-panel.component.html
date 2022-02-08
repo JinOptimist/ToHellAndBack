@@ -1,0 +1,14 @@
+<div class="rooms">
+    <mat-card class="room" *ngFor="let room of rooms">
+        <mat-card-title>{{room.roomName}}</mat-card-title>
+        <mat-card-subtitle>Класс</mat-card-subtitle>
+        <mat-card-content>
+            <div class="coins">
+                Fun
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="CheckRoom(room)">Исследовать</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

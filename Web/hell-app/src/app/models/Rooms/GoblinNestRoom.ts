@@ -1,16 +1,13 @@
 import { IHero } from "../IHero";
 import { BaseRooms } from "./BaseRooms";
+import { RoomType } from "./RoomType";
 
 export class GoblinNestRoom extends BaseRooms {
+    roomType: RoomType = RoomType.GoblinNestRoom;
     roomName: string;
 
-    constructor(private goblinCount: number) { 
-        super(); 
+    constructor(public goblinCount: number) {
+        super();
         this.roomName = `Гнездо гоблинов (+${goblinCount})`;
-    }
-
-    exploreRoom(hero: IHero): void {
-        hero.stamina -= this.goblinCount;
-        hero.coins += this.goblinCount * 2;
     }
 }

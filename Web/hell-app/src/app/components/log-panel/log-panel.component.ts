@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { GameEventsService } from 'src/app/services/GameEventsService';
-import { HeroService } from 'src/app/services/HeroService';
+import { HeroService } from 'src/app/services/maze/HeroService';
 
 @Component({
   selector: 'app-log-panel',

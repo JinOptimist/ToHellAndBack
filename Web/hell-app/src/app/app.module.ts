@@ -22,6 +22,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { LevelResearchActionPanelComponent } from './components/level-research-action-panel/level-research-action-panel.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatCardModule } from '@angular/material/card';
     GetHeroComponent,
     GameComponent,
     CreateHeroComponent,
-    DeadComponent
+    DeadComponent,
+    LevelResearchActionPanelComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { HeroService } from "./HeroService";
+import { HeroService } from "./maze/HeroService";
 
 @Injectable({
     providedIn: 'root'

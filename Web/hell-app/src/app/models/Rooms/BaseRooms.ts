@@ -1,7 +1,6 @@
-import { IHero } from "../IHero";
+import { RoomType } from "./RoomType";
 
 export abstract class BaseRooms {
      abstract roomName: string;
-     abstract exploreRoom(hero: IHero): void;
-     
+     abstract roomType: RoomType;
 }

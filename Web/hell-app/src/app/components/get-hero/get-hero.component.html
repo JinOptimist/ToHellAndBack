@@ -17,11 +17,13 @@
                 </div>
                 <div>
                     <span>Выносливость: [{{hero.stamina}} / {{hero.maxStamina}}]</span>
-                    <mat-progress-bar mode="determinate" [value]="hero.stamina / hero.maxStamina * 100"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" [value]="hero.stamina / hero.maxStamina * 100">
+                    </mat-progress-bar>
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button (click)="chooseHero(hero.name)">Откликнуться</button>
+                <button mat-raised-button color="primary" (click)="chooseHero(hero.name)">Откликнуться</button>
+                <button mat-raised-button color="warn" (click)="kill(hero)">Убить</button>
             </mat-card-actions>
         </mat-card>
     </div>

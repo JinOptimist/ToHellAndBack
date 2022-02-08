@@ -1,3 +1,4 @@
-<app-status></app-status>
-<app-action-panel></app-action-panel>
+<app-status [hero]="hero"></app-status>
+<!-- <app-action-panel [hero]="hero"></app-action-panel> -->
+<app-level-research-action-panel [hero]="hero" *ngIf="(roomsLeft > 0)"></app-level-research-action-panel>
 <app-log-panel></app-log-panel>

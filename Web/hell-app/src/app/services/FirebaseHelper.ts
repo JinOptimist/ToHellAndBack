@@ -22,15 +22,7 @@ export class FirebaseHelper {
         const refToCollection = ref(this.db, 'heroes/' + heroName);
 
         //get only once
-        var dataPromise = get(refToCollection);
-        var heroPromise = new Promise<IHero>((resolve, reject) => {
-            dataPromise.then((data) => {
-                const hero: IHero = data.val() as IHero;
-                resolve(hero);
-            }, reject);
-        });
-
-        return heroPromise;
+        return get(refToCollection).then(x => x.val() as IHero);;
     }
 
     SaveHero(hero: IHero): Promise<void> {
@@ -39,14 +31,15 @@ export class FirebaseHelper {
             coins: hero.coins,
             name: hero.name,
             stamina: hero.stamina,
-            maxStamina: hero.maxStamina
+            maxStamina: hero.maxStamina,
+            maze: hero.maze
         };
         // const heroToSave:IHero = {...hero};
         return set(refToCollection, heroToSave);
     }
 
-    KillHero(hero: IHero): void {
-        const refToCollection = ref(this.db, 'heroes/' + hero.name);
+    KillHero(heroName: string): void {
+        const refToCollection = ref(this.db, 'heroes/' + heroName);
         remove(refToCollection);
     }
 
