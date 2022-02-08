@@ -1,8 +1,10 @@
 import { HeroService } from "../services/HeroService";
 import { IHeroObserver } from "../services/IHeroObserver";
 import { IHero } from "./IHero";
+import { IMaze } from "./IMaze";
 
 export class Hero implements IHero {
+    maze: IMaze | undefined;
     name: string;
     coins: number;
     private _stamina: number;

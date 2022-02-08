@@ -12,11 +12,13 @@
             <mat-card-title>{{hero.name}}</mat-card-title>
             <mat-card-subtitle>Класс</mat-card-subtitle>
             <mat-card-content>
+                <div class="coins">
+                    <mat-icon>monetization_on</mat-icon> {{hero.coins}}
+                </div>
                 <div>
-                    <p>Выносливость: {{hero.stamina}}</p>
+                    <span>Выносливость: [{{hero.stamina}} / {{hero.maxStamina}}]</span>
                     <mat-progress-bar mode="determinate" [value]="hero.stamina / hero.maxStamina * 100"></mat-progress-bar>
                 </div>
-                <p>Золото: {{hero.coins}}</p>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-raised-button (click)="chooseHero(hero.name)">Откликнуться</button>

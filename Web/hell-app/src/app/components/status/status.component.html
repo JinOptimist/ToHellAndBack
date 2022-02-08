@@ -12,6 +12,14 @@
         Золото: <span class="value">{{ hero.coins }}</span>
     </div>
 </div>
+<div class="status-bar" *ngIf="(!!maze)">
+    <div class="info-block">
+        Уровень лабиринта: <span class="value">{{maze.level}}</span>
+    </div>
+    <div class="info-block">
+        Степень защиты: <span class="value">{{ maze.defense }}</span>
+    </div>
+</div>
 <div *ngIf="(!hero)">
     Is loading
 </div>

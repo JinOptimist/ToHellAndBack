@@ -12,6 +12,7 @@ export class MazeBuilder {
     BuildLevel(level: number): IMazeLevel {
         const mazeLevel = <IMazeLevel>{
             level: level,
+            defense: 0,
             rooms: []
         };
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
+import { IMazeLevel } from 'src/app/models/IMazeLevel';
 import { HeroService } from 'src/app/services/HeroService';
 
 @Component({
@@ -9,8 +10,9 @@ import { HeroService } from 'src/app/services/HeroService';
 })
 
 export class StatusComponent implements OnInit {
-  hero!: IHero;
+  hero: IHero;
   staminPercent: number;
+  maze: IMazeLevel;
 
   constructor(private heroService: HeroService) {
   }

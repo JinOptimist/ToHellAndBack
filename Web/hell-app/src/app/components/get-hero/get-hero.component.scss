@@ -3,5 +3,10 @@
     .hero-card{
         width: 200px;
         margin: 5px;
+
+        .coins{
+            display: flex;
+            align-items: flex-end;
+        }
     }
 }
