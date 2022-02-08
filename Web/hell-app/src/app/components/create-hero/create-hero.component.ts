@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-hero.component.scss']
 })
 export class CreateHeroComponent implements OnInit {
-  heroStartCoins: number;
   heroName: string;
   startCoinOptions: number[] = [250, 150, 100, 50, 0];
+  heroStartCoins: number = this.startCoinOptions[0];
   error: string;
 
   constructor(
@@ -22,16 +22,17 @@ export class CreateHeroComponent implements OnInit {
   }
 
   public createHero() {
-    //console.log(this.heroStartCoins);
     let hero = <IHero>{
       name: this.heroName,
       coins: this.heroStartCoins - 0,
       stamina: 300 - this.heroStartCoins,
       maxStamina: 300 - this.heroStartCoins
     };
-    this.heroService.CreateHero(hero).then(() => {
-      this.router.navigateByUrl("/game");
-    });
+    this.heroService
+      .CreateHero(hero)
+      .then(() => {
+        this.router.navigateByUrl("/game");
+      });
   }
 
 }

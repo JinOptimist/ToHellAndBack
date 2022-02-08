@@ -66,9 +66,9 @@ export class HeroService implements IHeroObserver {
     public HeroWasUpdated(hero: IHero): void {
         //check for death
         if (hero.stamina <= 0) {
-            this.router.navigateByUrl('/dead');
-            this.hero = undefined;
             this.firebaseHelper.KillHero(hero);
+            this.hero = undefined;
+            this.router.navigateByUrl('/dead');
         }
     }
 }

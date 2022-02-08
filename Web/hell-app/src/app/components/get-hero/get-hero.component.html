@@ -1,0 +1,29 @@
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Hero name</mat-label>
+        <input matInput [(ngModel)]="heroName" placeholder="Example: Conan" />
+    </mat-form-field>
+    <button mat-raised-button (click)="getHero()">Choose the hero</button>
+</div>
+<div>
+    <div>Герои что ищут богов</div>
+    <div class="heroes-card">
+        <mat-card class="hero-card" *ngFor="let hero of savedHeroes">
+            <mat-card-title>{{hero.name}}</mat-card-title>
+            <mat-card-subtitle>Класс</mat-card-subtitle>
+            <mat-card-content>
+                <div>
+                    <p>Выносливость: {{hero.stamina}}</p>
+                    <mat-progress-bar mode="determinate" [value]="hero.stamina / hero.maxStamina * 100"></mat-progress-bar>
+                </div>
+                <p>Золото: {{hero.coins}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="chooseHero(hero.name)">Откликнуться</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+<div>
+    {{error}}
+</div>

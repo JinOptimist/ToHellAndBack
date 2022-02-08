@@ -33,17 +33,6 @@ export class FirebaseHelper {
         return heroPromise;
     }
 
-    // SubscribeToUpdateHero (onHeroUpdate: (h: IHero) => void){
-    //     const heroName = 'Conan';
-    //     const refToCollection = ref(this.db, 'heroes/' + heroName);
-
-    //     onValue(refToCollection, 
-    //         (data) => {
-    //             const hero:IHero = data.val() as IHero;
-    //             onHeroUpdate(hero);
-    //         });
-    // }
-
     SaveHero(hero: IHero): Promise<void> {
         const refToCollection = ref(this.db, 'heroes/' + hero.name);
         const heroToSave = <IHero>{
@@ -60,8 +49,27 @@ export class FirebaseHelper {
         const refToCollection = ref(this.db, 'heroes/' + hero.name);
         remove(refToCollection);
     }
+
+    GetAllHeroes(): Promise<IHero[]> {
+        const refToCollection = ref(this.db, 'heroes');
+        return get(refToCollection)
+            .then(data => {
+                const heroesAsObject = data.val();
+                return Object.keys(heroesAsObject)
+                    .map(name => heroesAsObject[name]) as IHero[];
+            });
+    }
 }
 
+// SubscribeToUpdateHero (onHeroUpdate: (h: IHero) => void){
+//     const heroName = 'Conan';
+//     const refToCollection = ref(this.db, 'heroes/' + heroName);
+//     onValue(refToCollection,
+//         (data) => {
+//             const hero:IHero = data.val() as IHero;
+//             onHeroUpdate(hero);
+//         });
+// }
 
 // const firebaseConfig = {
 //     apiKey: "AIzaSyAfofIX36nawbTwCZdIGOBGq4jqlOvj5M4",
