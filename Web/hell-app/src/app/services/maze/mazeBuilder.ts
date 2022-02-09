@@ -39,13 +39,13 @@ export class MazeBuilder {
         const roomCount = level * 3;
         for (let i = 0; i < roomCount; i++) {
             let room: BaseRooms;
-            if (i % 3 == 1) {
+            if (i % 3 == 0) {
                 room = new EmptyRoom();
-            } if (i % 2 == 1) {
-                room = new GoblinNestRoom(i / 2);
+            } else if (i % 2 == 0) {
+                room = new GoblinNestRoom(Math.round(i / 2));
             }
             else {
-                room = new TreasuryRoom(i * 3 / 2);
+                room = new TreasuryRoom(Math.round(i * 3 / 2));
             }
             mazeLevel.rooms.push(room);
         }

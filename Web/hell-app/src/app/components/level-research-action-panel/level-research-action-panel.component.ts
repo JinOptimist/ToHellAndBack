@@ -18,12 +18,17 @@ export class LevelResearchActionPanelComponent implements OnInit {
   constructor(private roomService: RoomService) { }
 
   ngOnInit(): void {
-    const maze = this.hero.maze;
-    this.currentLevel = maze.levels[maze.heroCurrentLevelNumber];
-    this.rooms = this.currentLevel.rooms;
+    this.UpdateAvailableRooms();
   }
 
   CheckRoom(room: BaseRooms): void {
     this.roomService.CheckRoom(room, this.hero, this.currentLevel);
+    this.UpdateAvailableRooms();
+  }
+
+  UpdateAvailableRooms() {
+    const maze = this.hero.maze;
+    this.currentLevel = maze.levels[maze.heroCurrentLevelNumber];
+    this.rooms = this.roomService.UpdateAvailableRooms(this.hero);
   }
 }

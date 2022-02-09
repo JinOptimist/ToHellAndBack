@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
 import { HeroService } from 'src/app/services/maze/HeroService';
 import { Router } from '@angular/router';
-import { MazeBuilder } from 'src/app/services/maze/mazeBuilder';
+import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
 
 @Component({
   selector: 'app-create-hero',

@@ -4,7 +4,7 @@ import { IMaze } from 'src/app/models/IMaze';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { GameEventsService } from 'src/app/services/GameEventsService';
 import { HeroService } from 'src/app/services/maze/HeroService';
-import { MazeBuilder } from 'src/app/services/maze/mazeBuilder';
+import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
 
 @Component({
   selector: 'app-action-panel',
