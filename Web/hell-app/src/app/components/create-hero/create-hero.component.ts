@@ -11,7 +11,7 @@ import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
 })
 export class CreateHeroComponent implements OnInit {
   heroName: string;
-  startCoinOptions: number[] = [250, 150, 100, 50, 0];
+  startCoinOptions: number[] = [290, 250, 150, 100, 50, 0];
   heroStartCoins: number = this.startCoinOptions[0];
   error: string;
 
@@ -29,6 +29,7 @@ export class CreateHeroComponent implements OnInit {
       coins: this.heroStartCoins - 0,
       stamina: 300 - this.heroStartCoins,
       maxStamina: 300 - this.heroStartCoins,
+      staminCostToAvoidRoom: 5
     };
     hero.maze = this.mazeBuilder.BuildMaze(hero);
     this.heroService

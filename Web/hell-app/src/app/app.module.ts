@@ -5,7 +5,6 @@ import { initializeApp } from "firebase/app"
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActionPanelComponent } from './components/action-panel/action-panel.component';
 import { LogPanelComponent } from './components/log-panel/log-panel.component';
 import { StatusComponent } from './components/status/status.component';
 import { GetHeroComponent } from './components/get-hero/get-hero.component';
@@ -28,7 +27,6 @@ import { LevelResearchActionPanelComponent } from './components/level-research-a
   declarations: [
     AppComponent,
     StatusComponent,
-    ActionPanelComponent,
     LogPanelComponent,
     GetHeroComponent,
     GameComponent,

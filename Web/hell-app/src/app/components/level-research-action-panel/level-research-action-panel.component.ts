@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
 import { IMazeLevel } from 'src/app/models/IMazeLevel';
 import { BaseRooms } from 'src/app/models/Rooms/BaseRooms';
+import { RoomType } from 'src/app/models/Rooms/RoomType';
 import { GameEventsService } from 'src/app/services/GameEventsService';
 import { RoomService } from 'src/app/services/maze/RoomService';
 
@@ -26,9 +27,18 @@ export class LevelResearchActionPanelComponent implements OnInit {
     this.UpdateAvailableRooms();
   }
 
+  GetAroundRoom(room: BaseRooms): void {
+    this.roomService.GetAroundRoom(room, this.hero, this.currentLevel);
+    this.UpdateAvailableRooms();
+  }
+
   UpdateAvailableRooms() {
     const maze = this.hero.maze;
     this.currentLevel = maze.levels[maze.heroCurrentLevelNumber];
     this.rooms = this.roomService.UpdateAvailableRooms(this.hero);
+  }
+
+  IsNotExit(room: BaseRooms): boolean {
+    return room.roomType != RoomType.StairsDown;
   }
 }

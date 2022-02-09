@@ -5,5 +5,6 @@ export interface IHero {
     coins: number;
     stamina: number;
     maxStamina: number;
+    staminCostToAvoidRoom: number;
     maze: IMaze;
 }

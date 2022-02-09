@@ -1,14 +1,15 @@
 <div class="rooms">
     <mat-card class="room" *ngFor="let room of rooms">
-        <mat-card-title>{{room.roomName}}</mat-card-title>
-        <mat-card-subtitle>Класс</mat-card-subtitle>
+        <mat-card-title>Серая дверь</mat-card-title>
+        <mat-card-subtitle>{{room.roomName}}</mat-card-subtitle>
         <mat-card-content>
-            <div class="coins">
-                Fun
+            <div class="room-desc">
+                {{room.roomDesc}}
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button (click)="CheckRoom(room)">Исследовать</button>
+            <button mat-raised-button color="primary" (click)="CheckRoom(room)">Исследовать</button>
+            <button *ngIf="IsNotExit(room)" mat-raised-button (click)="GetAroundRoom(room)">Обойти стороной</button>
         </mat-card-actions>
     </mat-card>
 </div>

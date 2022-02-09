@@ -22,14 +22,14 @@ export class MazeBuilder {
 
         const mazeSize = hero.maxStamina / 10;
         for (let index = 1; index < mazeSize; index++) {
-            const mazeLevel = this.BuildLevel(index);
+            const mazeLevel = this.BuildLevel(index, index == mazeSize -1);
             maze.levels.push(mazeLevel);
         }
 
         return maze;
     }
 
-    private BuildLevel(level: number): IMazeLevel {
+    private BuildLevel(level: number, isLastLevel: boolean = false): IMazeLevel {
         const mazeLevel = <IMazeLevel>{
             level: level,
             defense: 0,
@@ -49,7 +49,10 @@ export class MazeBuilder {
             }
             mazeLevel.rooms.push(room);
         }
-        mazeLevel.rooms.push(new StairsDown());
+
+        if (!isLastLevel){
+            mazeLevel.rooms.push(new StairsDown());
+        }
 
         return mazeLevel
     }

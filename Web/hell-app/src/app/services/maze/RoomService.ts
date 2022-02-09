@@ -15,7 +15,7 @@ import { HeroService } from "./HeroService";
 })
 
 export class RoomService {
-    public CountOfRoomToChoose:number = 3;
+    public CountOfRoomToChoose: number = 3;
 
     constructor(
         private gameEventsService: GameEventsService,
@@ -28,28 +28,33 @@ export class RoomService {
                 this.CheckEmpty(room as EmptyRoom, hero);
                 break;
             case RoomType.GoblinNestRoom:
-                this.CheckGoblinNestRoom(room as GoblinNestRoom, hero);
+                this.CheckGoblinNestRoom(room as GoblinNestRoom, hero, currentLevel);
                 break;
             case RoomType.TreasuryRoom:
                 this.CheckTreasuryRoom(room as TreasuryRoom, hero);
                 break;
             case RoomType.StairsDown:
-                //!!!!!!!!!! Save progress after leave the level
                 this.CheckStairsDown(room as StairsDown, hero);
-                this.heroService.SaveCurrentHero();
                 break;
             default:
                 throw new Error("Unexpected room type: " + room.roomType);
         }
 
-        const index = currentLevel.rooms.indexOf(room, 0);
-        if (index > -1) {
-            currentLevel.rooms.splice(index, 1);
-        }
-
         this.gameEventsService.StoreAllEventsMessage(
             `Герой обследовал комнату ${room.roomName}`
         );
+
+        this.RemoveRoomInvestigatedRoomAndSaveProgress(room, hero, currentLevel);
+    }
+
+    public GetAroundRoom(room: BaseRooms, hero: IHero, currentLevel: IMazeLevel) {
+        this.gameEventsService.StoreAllEventsMessage(
+            `Герой обследовал комнату ${room.roomName}`
+        );
+
+        hero.stamina -= hero.staminCostToAvoidRoom;
+
+        this.RemoveRoomInvestigatedRoomAndSaveProgress(room, hero, currentLevel);
     }
 
     public UpdateAvailableRooms(hero: IHero): BaseRooms[] {
@@ -57,6 +62,18 @@ export class RoomService {
         const currentLevel = maze.levels[maze.heroCurrentLevelNumber];
         this.ShuffleRooms(currentLevel.rooms);
         return currentLevel.rooms.slice(0, this.CountOfRoomToChoose);
+    }
+
+    private RemoveRoomInvestigatedRoomAndSaveProgress(room: BaseRooms, hero: IHero, currentLevel: IMazeLevel) {
+        const index = currentLevel.rooms.indexOf(room, 0);
+        if (index > -1) {
+            currentLevel.rooms.splice(index, 1);
+        }
+
+        this.heroService.HeroWasUpdated(hero);
+
+        //!!!!!!!!!! Save progress
+        this.heroService.SaveCurrentHero();
     }
 
     private ShuffleRooms(rooms: BaseRooms[]) {
@@ -81,9 +98,10 @@ export class RoomService {
         hero.stamina--;
     }
 
-    private CheckGoblinNestRoom(room: GoblinNestRoom, hero: IHero) {
+    private CheckGoblinNestRoom(room: GoblinNestRoom, hero: IHero, currentLevel: IMazeLevel) {
         hero.stamina -= room.goblinCount;
         hero.coins += room.goblinCount * 2;
+        currentLevel.defense += room.goblinCount;
     }
 
     private CheckTreasuryRoom(room: TreasuryRoom, hero: IHero) {

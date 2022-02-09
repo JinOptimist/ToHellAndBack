@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Hero } from "../../models/Hero";
 import { IHero } from "../../models/IHero";
 import { FirebaseHelper } from "../FirebaseHelper";
 import { IHeroObserver } from "./IHeroObserver";
@@ -21,7 +20,7 @@ export class HeroService implements IHeroObserver {
             .SaveHero(hero)
             .then(() => {
                 if (!!hero) {
-                    this.hero = this.CreateHeroByInterface(hero);
+                    this.hero = hero;
                 }
             });
     }
@@ -34,9 +33,8 @@ export class HeroService implements IHeroObserver {
                     return undefined;
                 }
 
-                const heroWithSubscribtion: Hero = this.CreateHeroByInterface(hero);
-                this.hero = heroWithSubscribtion;
-                return heroWithSubscribtion;
+                this.hero = hero;
+                return hero;
             });
     }
 
@@ -48,18 +46,6 @@ export class HeroService implements IHeroObserver {
         }
 
         this.firebaseHelper.SaveHero(this.hero);
-    }
-
-    private CreateHeroByInterface(ihero: IHero): Hero {
-        const heroWithSubscribtion: Hero = new Hero();
-        heroWithSubscribtion.name = ihero.name;
-        heroWithSubscribtion.stamina = ihero.stamina;
-        heroWithSubscribtion.maxStamina = ihero.maxStamina;
-        heroWithSubscribtion.coins = ihero.coins;
-        heroWithSubscribtion.maze = ihero.maze;
-
-        heroWithSubscribtion.AttachToHeroUpdating(this);
-        return heroWithSubscribtion;
     }
 
     public HeroWasUpdated(hero: IHero): void {

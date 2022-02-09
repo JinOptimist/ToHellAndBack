@@ -20,7 +20,7 @@
         Комнат на уровне осталось: <span class="value">{{ hero.maze.levels[hero.maze.heroCurrentLevelNumber].rooms.length }}</span>
     </div>
     <div class="info-block">
-        Степень защиты: <span class="value">{{ hero.maze.mazePowerBalance }}</span>
+        Степень защиты: <span class="value">{{ hero.maze.levels[hero.maze.heroCurrentLevelNumber].defense }}</span>
     </div>
 </div>
 <div *ngIf="(!hero)">

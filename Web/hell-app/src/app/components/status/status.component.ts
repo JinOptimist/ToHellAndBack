@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
-import { IMazeLevel } from 'src/app/models/IMazeLevel';
 import { HeroService } from 'src/app/services/maze/HeroService';
 
 @Component({

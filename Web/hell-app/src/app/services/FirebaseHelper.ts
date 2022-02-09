@@ -18,24 +18,13 @@ export class FirebaseHelper {
     }
 
     GetHeroAsync(heroName: string): Promise<IHero> {
-        //const heroName = 'Conan';
         const refToCollection = ref(this.db, 'heroes/' + heroName);
-
-        //get only once
         return get(refToCollection).then(x => x.val() as IHero);;
     }
 
     SaveHero(hero: IHero): Promise<void> {
         const refToCollection = ref(this.db, 'heroes/' + hero.name);
-        const heroToSave = <IHero>{
-            coins: hero.coins,
-            name: hero.name,
-            stamina: hero.stamina,
-            maxStamina: hero.maxStamina,
-            maze: hero.maze
-        };
-        // const heroToSave:IHero = {...hero};
-        return set(refToCollection, heroToSave);
+        return set(refToCollection, hero);
     }
 
     KillHero(heroName: string): void {
