@@ -1,6 +1,6 @@
 import { IHero } from "../IHero";
 import { BaseRooms } from "./BaseRooms";
-import { RoomType } from "./RoomType";
+import { RoomType } from "../../enum/RoomType";
 
 export class GoblinNestRoom extends BaseRooms {
     roomType: RoomType = RoomType.GoblinNestRoom;
@@ -10,7 +10,7 @@ export class GoblinNestRoom extends BaseRooms {
     constructor(public goblinCount: number) {
         super();
         this.roomName = `Гнездо гоблинов (+${goblinCount})`;
-        
+
         let volume: string;
         if (goblinCount < 5) {
             volume = 'Звуки едва слышны';

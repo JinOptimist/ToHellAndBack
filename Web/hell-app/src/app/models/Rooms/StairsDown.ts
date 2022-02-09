@@ -1,5 +1,5 @@
 import { BaseRooms } from "./BaseRooms";
-import { RoomType } from "./RoomType";
+import { RoomType } from "../../enum/RoomType";
 
 export class StairsDown extends BaseRooms {
     roomType: RoomType = RoomType.StairsDown;

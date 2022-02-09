@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MazeStatus } from "src/app/enum/MazeStatus";
 import { IHero } from "src/app/models/IHero";
 import { IMaze } from "src/app/models/IMaze";
 import { IMazeLevel } from "src/app/models/IMazeLevel"
@@ -17,11 +18,12 @@ export class MazeBuilder {
         const maze = <IMaze>{
             levels: [],
             mazePowerBalance: 100,
-            heroCurrentLevelNumber: 1
+            heroCurrentLevelNumber: 1,
+            status: MazeStatus.InProgress
         };
 
         const mazeSize = hero.maxStamina / 10;
-        for (let index = 1; index < mazeSize; index++) {
+        for (let index = 0; index < mazeSize; index++) {
             const mazeLevel = this.BuildLevel(index, index == mazeSize -1);
             maze.levels.push(mazeLevel);
         }

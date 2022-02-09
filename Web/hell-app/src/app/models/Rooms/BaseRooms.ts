@@ -1,4 +1,4 @@
-import { RoomType } from "./RoomType";
+import { RoomType } from "../../enum/RoomType";
 
 export abstract class BaseRooms {
      abstract roomName: string;

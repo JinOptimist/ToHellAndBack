@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { MazeStatus } from "src/app/enum/MazeStatus";
+import { RoomType } from "src/app/enum/RoomType";
 import { IHero } from "src/app/models/IHero";
 import { IMazeLevel } from "src/app/models/IMazeLevel";
 import { BaseRooms } from "src/app/models/Rooms/BaseRooms";
 import { EmptyRoom } from "src/app/models/Rooms/EmptyRoom";
 import { GoblinNestRoom } from "src/app/models/Rooms/GoblinNestRoom";
-import { RoomType } from "src/app/models/Rooms/RoomType";
 import { StairsDown } from "src/app/models/Rooms/StairsDown";
 import { TreasuryRoom } from "src/app/models/Rooms/TreasuryRoom";
 import { GameEventsService } from "../GameEventsService";
@@ -19,7 +21,8 @@ export class RoomService {
 
     constructor(
         private gameEventsService: GameEventsService,
-        private heroService: HeroService
+        private heroService: HeroService,
+        private router: Router
     ) { }
 
     public CheckRoom(room: BaseRooms, hero: IHero, currentLevel: IMazeLevel) {
@@ -65,12 +68,21 @@ export class RoomService {
     }
 
     private RemoveRoomInvestigatedRoomAndSaveProgress(room: BaseRooms, hero: IHero, currentLevel: IMazeLevel) {
+        this.heroService.HeroWasUpdated(hero);
+
         const index = currentLevel.rooms.indexOf(room, 0);
         if (index > -1) {
             currentLevel.rooms.splice(index, 1);
         }
 
-        this.heroService.HeroWasUpdated(hero);
+        //If we complete all rooms and don't move to next level it means that maze if complete
+        const currentLevelActual = hero.maze.levels[hero.maze.heroCurrentLevelNumber];
+        if (currentLevelActual.rooms.length == 0){
+            hero.maze.status = MazeStatus.Complete;
+            this.router.navigateByUrl('/leave-from-dungeon');
+            //Nasty hack, but I don't know how also I could fix it
+            currentLevelActual.rooms.push(new EmptyRoom());
+        }
 
         //!!!!!!!!!! Save progress
         this.heroService.SaveCurrentHero();

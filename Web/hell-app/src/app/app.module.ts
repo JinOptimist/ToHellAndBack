@@ -22,6 +22,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { LevelResearchActionPanelComponent } from './components/level-research-action-panel/level-research-action-panel.component';
+import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LevelResearchActionPanelComponent } from './components/level-research-a
     GameComponent,
     CreateHeroComponent,
     DeadComponent,
-    LevelResearchActionPanelComponent
+    LevelResearchActionPanelComponent,
+    LeaveFromDungeonComponent
   ],
   imports: [
     BrowserModule,

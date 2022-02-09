@@ -4,6 +4,7 @@ import { CreateHeroComponent } from './components/create-hero/create-hero.compon
 import { DeadComponent } from './components/dead/dead.component';
 import { GameComponent } from './components/game/game.component';
 import { GetHeroComponent } from './components/get-hero/get-hero.component';
+import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
 import { GameGuard } from './services/GameGuard';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'createHero', component: CreateHeroComponent },
   { path: 'game', component: GameComponent, canActivate: [GameGuard] },
   { path: 'dead', component: DeadComponent },
+  { path: 'leave-from-dungeon', component: GameComponent },
   { path: '', component: GetHeroComponent },
 ];
 

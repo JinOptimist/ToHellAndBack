@@ -1,6 +1,6 @@
 import { IHero } from "../IHero";
 import { BaseRooms } from "./BaseRooms";
-import { RoomType } from "./RoomType";
+import { RoomType } from "../../enum/RoomType";
 
 export class EmptyRoom extends BaseRooms {
     roomType: RoomType = RoomType.Empty;

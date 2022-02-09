@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
 import { IMazeLevel } from 'src/app/models/IMazeLevel';
 import { BaseRooms } from 'src/app/models/Rooms/BaseRooms';
-import { RoomType } from 'src/app/models/Rooms/RoomType';
+import { RoomType } from 'src/app/enum/RoomType';
 import { GameEventsService } from 'src/app/services/GameEventsService';
 import { RoomService } from 'src/app/services/maze/RoomService';
 

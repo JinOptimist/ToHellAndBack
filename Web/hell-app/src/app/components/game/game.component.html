@@ -1,4 +1,5 @@
 <app-status [hero]="hero"></app-status>
 <!-- <app-action-panel [hero]="hero"></app-action-panel> -->
-<app-level-research-action-panel [hero]="hero" *ngIf="(roomsLeft > 0)"></app-level-research-action-panel>
+<app-level-research-action-panel [hero]="hero" *ngIf="hero.maze.status == InProgressValue"></app-level-research-action-panel>
+<app-leave-from-dungeon *ngIf="hero.maze.status == CompleteValue"></app-leave-from-dungeon>
 <app-log-panel></app-log-panel>
