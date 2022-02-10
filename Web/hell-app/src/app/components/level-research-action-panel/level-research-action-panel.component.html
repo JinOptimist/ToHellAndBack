@@ -8,8 +8,9 @@
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="CheckRoom(room)">Исследовать</button>
+            <button *ngIf="IsNotExit(room)" mat-raised-button color="primary" (click)="CheckRoom(room)">Исследовать</button>
             <button *ngIf="IsNotExit(room)" mat-raised-button (click)="GetAroundRoom(room)">Обойти стороной</button>
+            <button *ngIf="!IsNotExit(room)" mat-raised-button (click)="EndOfLevel(room)">Отдохнуть</button>
         </mat-card-actions>
     </mat-card>
 </div>

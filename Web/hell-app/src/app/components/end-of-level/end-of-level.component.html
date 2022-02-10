@@ -1,0 +1,10 @@
+<app-status [hero]="hero"></app-status>
+
+<div>Ура весь уровень зачищен</div>
+<div>Итого я собрал {{hero.coins}} монет</div>
+<div>Как быть дальше? Рискнуть и спусться ниже или всё же вернуться</div>
+<div>
+    <button mat-raised-button (click)="GoNext()">Спуститься</button>
+    <button mat-raised-button (click)="GoHome()">Вернуться</button>
+            
+</div>

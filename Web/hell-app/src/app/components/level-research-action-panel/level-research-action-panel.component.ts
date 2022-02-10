@@ -5,6 +5,7 @@ import { BaseRooms } from 'src/app/models/Rooms/BaseRooms';
 import { RoomType } from 'src/app/enum/RoomType';
 import { GameEventsService } from 'src/app/services/GameEventsService';
 import { RoomService } from 'src/app/services/maze/RoomService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-level-research-action-panel',
@@ -16,7 +17,9 @@ export class LevelResearchActionPanelComponent implements OnInit {
   rooms: BaseRooms[];
   currentLevel: IMazeLevel;
 
-  constructor(private roomService: RoomService) { }
+  constructor(
+    private roomService: RoomService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.UpdateAvailableRooms();
@@ -40,5 +43,10 @@ export class LevelResearchActionPanelComponent implements OnInit {
 
   IsNotExit(room: BaseRooms): boolean {
     return room.roomType != RoomType.StairsDown;
+  }
+
+  EndOfLevel(room: BaseRooms){
+    this.roomService.CheckRoom(room, this.hero, this.currentLevel);
+    this.router.navigateByUrl('/end-of-level');
   }
 }
