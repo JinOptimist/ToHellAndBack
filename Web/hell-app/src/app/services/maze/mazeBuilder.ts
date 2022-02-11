@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MazeStatus } from "src/app/enum/MazeStatus";
+import { IEnemy } from "src/app/models/enemies/IEnemy";
 import { IHero } from "src/app/models/IHero";
 import { IMaze } from "src/app/models/IMaze";
 import { IMazeLevel } from "src/app/models/IMazeLevel"
@@ -8,12 +9,15 @@ import { EmptyRoom } from "src/app/models/Rooms/EmptyRoom";
 import { GoblinNestRoom } from "src/app/models/Rooms/GoblinNestRoom";
 import { StairsDown } from "src/app/models/Rooms/StairsDown";
 import { TreasuryRoom } from "src/app/models/Rooms/TreasuryRoom";
+import { EnemyBuilder } from "./EnemyBuilder";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class MazeBuilder {
+    constructor(private enemyBuilder: EnemyBuilder) { }
+
     BuildMaze(hero: IHero): IMaze {
         const maze = <IMaze>{
             levels: [],
@@ -22,9 +26,9 @@ export class MazeBuilder {
             status: MazeStatus.InProgress
         };
 
-        const mazeLevelsCount = hero.characteristics.maxStamina / 10;
+        const mazeLevelsCount = hero.maxStamina / 10;
         for (let index = 0; index < mazeLevelsCount; index++) {
-            const mazeLevel = this.BuildLevel(index, index == mazeLevelsCount -1);
+            const mazeLevel = this.BuildLevel(index, index == mazeLevelsCount - 1);
             maze.levels.push(mazeLevel);
         }
 
@@ -44,7 +48,13 @@ export class MazeBuilder {
             if (i % 3 == 0) {
                 room = new EmptyRoom();
             } else if (i % 2 == 0) {
-                room = new GoblinNestRoom(Math.round(i / 2));
+                const goblins: IEnemy[] = [];
+                const goblinCount = Math.round(i / 2);
+                for (let i = 0; i < goblinCount; i++) {
+                    const goblin = this.enemyBuilder.buildGoblin();
+                    goblins.push(goblin);
+                }
+                room = new GoblinNestRoom(goblins);
             }
             else {
                 room = new TreasuryRoom(Math.round(i * 3 / 2));
@@ -52,7 +62,7 @@ export class MazeBuilder {
             mazeLevel.rooms.push(room);
         }
 
-        if (!isLastLevel){
+        if (!isLastLevel) {
             mazeLevel.rooms.push(new StairsDown());
         }
 

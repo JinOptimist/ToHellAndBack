@@ -10,6 +10,7 @@ import { GoblinNestRoom } from "src/app/models/Rooms/GoblinNestRoom";
 import { StairsDown } from "src/app/models/Rooms/StairsDown";
 import { TreasuryRoom } from "src/app/models/Rooms/TreasuryRoom";
 import { GameEventsService } from "../GameEventsService";
+import { FightHelper } from "./FightHelper";
 import { HeroService } from "./HeroService";
 
 @Injectable({
@@ -22,6 +23,7 @@ export class RoomService {
     constructor(
         private gameEventsService: GameEventsService,
         private heroService: HeroService,
+        private fightHelper: FightHelper,
         private router: Router
     ) { }
 
@@ -43,7 +45,7 @@ export class RoomService {
                 throw new Error("Unexpected room type: " + room.roomType);
         }
 
-        this.gameEventsService.StoreAllEventsMessage(
+        this.gameEventsService.addSystemMessage(
             `Герой обследовал комнату ${room.roomName}`
         );
 
@@ -51,11 +53,11 @@ export class RoomService {
     }
 
     public GetAroundRoom(room: BaseRooms, hero: IHero, currentLevel: IMazeLevel) {
-        this.gameEventsService.StoreAllEventsMessage(
+        this.gameEventsService.addSystemMessage(
             `Герой обследовал комнату ${room.roomName}`
         );
 
-        hero.characteristics.stamina -= hero.staminCostToAvoidRoom;
+        hero.stamina -= hero.staminCostToAvoidRoom;
 
         this.RemoveRoomInvestigatedRoomAndSaveProgress(room, hero, currentLevel);
     }
@@ -77,7 +79,7 @@ export class RoomService {
 
         //If we complete all rooms and don't move to next level it means that maze if complete
         const currentLevelActual = hero.maze.levels[hero.maze.heroCurrentLevelNumber];
-        if (currentLevelActual.rooms.length == 0){
+        if (currentLevelActual.rooms.length == 0) {
             hero.maze.status = MazeStatus.Complete;
             this.router.navigateByUrl('/leave-from-dungeon');
             //Nasty hack, but I don't know how also I could fix it
@@ -107,18 +109,22 @@ export class RoomService {
     }
 
     private CheckEmpty(room: EmptyRoom, hero: IHero) {
-        hero.characteristics.stamina--;
+        hero.stamina--;
     }
 
     private CheckGoblinNestRoom(room: GoblinNestRoom, hero: IHero, currentLevel: IMazeLevel) {
-        hero.characteristics.stamina -= room.goblinCount;
-        hero.coins += room.goblinCount * 2;
-        currentLevel.defense += room.goblinCount;
+        const goblinCount = room.goblins.length;
+        
+        this.fightHelper.fightAgainstEnemies(hero, room.goblins);
+
+        this.gameEventsService.addHeroPhrase(hero, `С каждого гоблина по две монеты. Неплохо`);
+        hero.coins += goblinCount * 2;
+        currentLevel.defense += goblinCount;
     }
 
     private CheckTreasuryRoom(room: TreasuryRoom, hero: IHero) {
         hero.coins += room.coinsCount;
-        hero.characteristics.stamina--;
+        hero.stamina--;
     }
 
     private CheckStairsDown(room: StairsDown, hero: IHero) {

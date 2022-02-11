@@ -3,10 +3,10 @@
         Имя: <span class="value">{{hero.name}}</span>
     </div>
     <div class="info-block stamina">
-        Выносливость: <span class="value">{{ hero.characteristics.stamina }}</span>
+        Выносливость: <span class="value">{{ hero.stamina }}</span>
         <mat-progress-bar 
             mode="determinate" 
-            [value]="hero.characteristics.stamina / hero.characteristics.maxStamina * 100"></mat-progress-bar>
+            [value]="hero.stamina / hero.maxStamina * 100"></mat-progress-bar>
     </div>
     <div class="info-block coins">
         Золото: <span class="value">{{ hero.coins }}</span>

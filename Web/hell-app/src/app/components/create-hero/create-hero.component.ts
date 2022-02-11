@@ -29,13 +29,11 @@ export class CreateHeroComponent implements OnInit {
       name: this.heroName,
       coins: this.heroStartCoins - 0,
       staminCostToAvoidRoom: 5,
-      characteristics: {
-        strength : 10,
-        dexterity: 10,
-        luck: 10,
-        stamina:300 - this.heroStartCoins,
-        maxStamina:300 - this.heroStartCoins,
-      } as ICharacteristics
+      strength: 10,
+      dexterity: 10,
+      luck: 10,
+      stamina: 300 - this.heroStartCoins,
+      maxStamina: 300 - this.heroStartCoins,
     };
     hero.maze = this.mazeBuilder.BuildMaze(hero);
     this.heroService
