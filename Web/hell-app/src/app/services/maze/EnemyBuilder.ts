@@ -7,7 +7,7 @@ import { IEnemy } from "src/app/models/enemies/IEnemy";
 
 
 export class EnemyBuilder {
-    private epithets: string[] = ["злобный", "мерзкий", "усталый", "ехидный"];
+    private epithets: string[] = ["Злобный", "мерзкий", "усталый", "ехидный"];
 
     buildGoblin(): IEnemy {
         const goblin = this.buildEnemy(

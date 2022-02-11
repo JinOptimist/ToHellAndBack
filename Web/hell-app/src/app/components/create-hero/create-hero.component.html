@@ -5,12 +5,22 @@
     </mat-form-field>
 </div>
 <div>
-    Сколько у героя монет было с самого начала:
+    Стартовый капитал:
     <mat-button-toggle-group [(ngModel)]="heroStartCoins" aria-label="Font Style">
         <mat-button-toggle 
             *ngFor="let startCoinOption of startCoinOptions" 
             [value]="startCoinOption">
-            {{startCoinOption}}
+            {{startCoinOption}} $
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+<div>
+    Уровень веры:
+    <mat-button-toggle-group [(ngModel)]="levelOfFaith" aria-label="Font Style">
+        <mat-button-toggle 
+            *ngFor="let levelOfFaith of levelOfFaithOptions" 
+            [value]="levelOfFaith">
+            {{levelOfFaith}}
         </mat-button-toggle>
     </mat-button-toggle-group>
 </div>
