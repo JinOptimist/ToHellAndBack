@@ -5,7 +5,6 @@ import { Database, get, getDatabase, onValue, ref, remove, set } from "firebase/
 import { Action } from "rxjs/internal/scheduler/Action";
 import { from, Observable } from "rxjs";
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -16,6 +15,16 @@ export class FirebaseHelper {
     constructor() {
         this.db = getDatabase();
     }
+
+    // GetHero(heroName: string): Observable<IHero> {
+    //     const refToCollection = ref(this.db, 'heroes/' + heroName);
+
+    //     new Observable();
+    //     const test = onValue(refToCollection, ()=>{});
+    //     test.apply(undefined);
+        
+    //     return;
+    // }
 
     GetHeroAsync(heroName: string): Promise<IHero> {
         const refToCollection = ref(this.db, 'heroes/' + heroName);

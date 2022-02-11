@@ -22,7 +22,7 @@ export class MazeBuilder {
             status: MazeStatus.InProgress
         };
 
-        const mazeLevelsCount = hero.maxStamina / 10;
+        const mazeLevelsCount = hero.characteristics.maxStamina / 10;
         for (let index = 0; index < mazeLevelsCount; index++) {
             const mazeLevel = this.BuildLevel(index, index == mazeLevelsCount -1);
             maze.levels.push(mazeLevel);

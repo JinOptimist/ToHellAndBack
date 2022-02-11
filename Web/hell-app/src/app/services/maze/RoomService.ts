@@ -55,7 +55,7 @@ export class RoomService {
             `Герой обследовал комнату ${room.roomName}`
         );
 
-        hero.stamina -= hero.staminCostToAvoidRoom;
+        hero.characteristics.stamina -= hero.staminCostToAvoidRoom;
 
         this.RemoveRoomInvestigatedRoomAndSaveProgress(room, hero, currentLevel);
     }
@@ -107,18 +107,18 @@ export class RoomService {
     }
 
     private CheckEmpty(room: EmptyRoom, hero: IHero) {
-        hero.stamina--;
+        hero.characteristics.stamina--;
     }
 
     private CheckGoblinNestRoom(room: GoblinNestRoom, hero: IHero, currentLevel: IMazeLevel) {
-        hero.stamina -= room.goblinCount;
+        hero.characteristics.stamina -= room.goblinCount;
         hero.coins += room.goblinCount * 2;
         currentLevel.defense += room.goblinCount;
     }
 
     private CheckTreasuryRoom(room: TreasuryRoom, hero: IHero) {
         hero.coins += room.coinsCount;
-        hero.stamina--;
+        hero.characteristics.stamina--;
     }
 
     private CheckStairsDown(room: StairsDown, hero: IHero) {

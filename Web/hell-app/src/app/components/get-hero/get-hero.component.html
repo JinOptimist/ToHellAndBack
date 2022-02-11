@@ -17,8 +17,8 @@
                     Dungeon: {{hero.maze.heroCurrentLevelNumber}}
                 </div>
                 <div>
-                    <span>Выносливость: [{{hero.stamina}} / {{hero.maxStamina}}]</span>
-                    <mat-progress-bar mode="determinate" [value]="hero.stamina / hero.maxStamina * 100">
+                    <span>Выносливость: [{{hero.characteristics.stamina}} / {{hero.characteristics.maxStamina}}]</span>
+                    <mat-progress-bar mode="determinate" [value]="hero.characteristics.stamina / hero.characteristics.maxStamina * 100">
                     </mat-progress-bar>
                 </div>
             </mat-card-content>

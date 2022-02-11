@@ -3,6 +3,7 @@ import { IHero } from 'src/app/models/IHero';
 import { HeroService } from 'src/app/services/maze/HeroService';
 import { Router } from '@angular/router';
 import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
+import { ICharacteristics } from 'src/app/models/ICharacteristics';
 
 @Component({
   selector: 'app-create-hero',
@@ -27,9 +28,14 @@ export class CreateHeroComponent implements OnInit {
     const hero = <IHero>{
       name: this.heroName,
       coins: this.heroStartCoins - 0,
-      stamina: 300 - this.heroStartCoins,
-      maxStamina: 300 - this.heroStartCoins,
-      staminCostToAvoidRoom: 5
+      staminCostToAvoidRoom: 5,
+      characteristics: {
+        strength : 10,
+        dexterity: 10,
+        luck: 10,
+        stamina:300 - this.heroStartCoins,
+        maxStamina:300 - this.heroStartCoins,
+      } as ICharacteristics
     };
     hero.maze = this.mazeBuilder.BuildMaze(hero);
     this.heroService

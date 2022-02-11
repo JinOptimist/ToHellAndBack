@@ -17,6 +17,6 @@ export class StatusComponent implements OnInit {
   constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
-    this.staminPercent = this.hero.stamina / this.hero.maxStamina * 100;
+    this.staminPercent = this.hero.characteristics.stamina / this.hero.characteristics.maxStamina * 100;
   }
 }
