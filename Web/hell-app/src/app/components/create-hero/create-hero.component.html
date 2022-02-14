@@ -1,32 +1,75 @@
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Имя героя</mat-label>
-        <input matInput [(ngModel)]="heroName" placeholder="Например: Конан" />
-    </mat-form-field>
-</div>
-<div>
-    Стартовый капитал:
-    <mat-button-toggle-group [(ngModel)]="heroStartCoins" aria-label="Font Style">
-        <mat-button-toggle 
-            *ngFor="let startCoinOption of startCoinOptions" 
-            [value]="startCoinOption">
-            {{startCoinOption}} $
-        </mat-button-toggle>
-    </mat-button-toggle-group>
-</div>
-<div>
-    Уровень веры:
-    <mat-button-toggle-group [(ngModel)]="levelOfFaith" aria-label="Font Style">
-        <mat-button-toggle 
-            *ngFor="let levelOfFaith of levelOfFaithOptions" 
-            [value]="levelOfFaith">
-            {{levelOfFaith}}
-        </mat-button-toggle>
-    </mat-button-toggle-group>
-</div>
-<div>
-    <button mat-raised-button (click)="createHero()">Создать</button>
-</div>
+<mat-stepper linear #stepper>
+    <mat-step>
+        <ng-template matStepLabel>
+            Имя героя 
+            <span *ngIf="!!heroName">
+                "{{heroName}}"
+            </span>
+        </ng-template>
+        <mat-form-field appearance="fill">
+            <mat-label>Имя героя</mat-label>
+            <input matInput [(ngModel)]="heroName" placeholder="Например: Конан" />
+        </mat-form-field>
+        <div>
+            <button mat-button matStepperNext>Дальше</button>
+          </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Стартовый капитал</ng-template>
+        <div>
+            <mat-button-toggle-group [(ngModel)]="heroStartCoins" aria-label="Font Style">
+                <mat-button-toggle *ngFor="let startCoinOption of startCoinOptions" [value]="startCoinOption">
+                    {{startCoinOption}} $
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+            <div>
+                Чем лучше стартовое материальное положение Героя, тем меньше у него будет выносливость.
+            </div>
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Уровень веры</ng-template>
+        <div>
+            Уровень веры:
+            <mat-button-toggle-group [(ngModel)]="levelOfFaith" aria-label="Font Style">
+                <mat-button-toggle *ngFor="let levelOfFaith of levelOfFaithOptions" [value]="levelOfFaith">
+                    {{levelOfFaith}}
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+            <div>
+                Чем выше уровень веры, тем чаще герой будет бросать кости, для принятия решения и тем чаще вы сможете
+                вмешиваться в его жизнь. При низком уровен веры, герой будет более самостоятельным и независимым
+            </div>
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>Проверка</ng-template>
+        <div>
+            Герой: {{heroName}}
+        </div>
+        <div>
+            Монеты: {{heroStartCoins}}
+        </div>
+        <div>
+            Вера: {{levelOfFaith}}
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-raised-button (click)="createHero()">Создать</button>
+          </div>
+    </mat-step>
+    
+</mat-stepper>
+
 <div>
     {{error}}
 </div>

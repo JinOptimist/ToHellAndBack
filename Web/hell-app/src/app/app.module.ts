@@ -22,6 +22,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { LevelResearchActionPanelComponent } from './components/level-research-action-panel/level-research-action-panel.component';
 import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
@@ -54,7 +55,8 @@ import { EndOfLevelComponent } from './components/end-of-level/end-of-level.comp
     MatButtonToggleModule,
     MatCardModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
