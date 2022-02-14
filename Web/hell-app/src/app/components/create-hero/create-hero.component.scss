@@ -1,0 +1,14 @@
+.strength{
+    margin-top: 20px;
+    .mat-slider.mat-accent .mat-slider-track-fill, .mat-slider.mat-accent .mat-slider-thumb, .mat-slider.mat-accent .mat-slider-thumb-label{
+        background-color: red;
+    }
+}
+
+.luck{
+    .mat-slider.mat-accent .mat-slider-track-fill, 
+    .mat-slider.mat-accent .mat-slider-thumb, 
+    .mat-slider.mat-accent .mat-slider-thumb-label{
+        background-color: rgb(38, 6, 179);
+    }
+}

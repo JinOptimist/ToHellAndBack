@@ -1,7 +1,7 @@
 <mat-stepper linear #stepper>
     <mat-step>
         <ng-template matStepLabel>
-            Имя героя 
+            Имя героя
             <span *ngIf="!!heroName">
                 "{{heroName}}"
             </span>
@@ -12,7 +12,7 @@
         </mat-form-field>
         <div>
             <button mat-button matStepperNext>Дальше</button>
-          </div>
+        </div>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Стартовый капитал</ng-template>
@@ -29,7 +29,7 @@
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
-          </div>
+        </div>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Уровень веры</ng-template>
@@ -48,7 +48,41 @@
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
-          </div>
+        </div>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>Характеристики</ng-template>
+        <div class="strength">
+            Сила:
+            <mat-slider [min]="1" [max]="10" [step]="1" [thumbLabel]="true" [(ngModel)]="strength"
+                aria-labelledby="example-name-label">
+            </mat-slider>
+            <div>
+                Для сильных :)
+            </div>
+        </div>
+        <div>
+            Ловкость:
+            <mat-slider [min]="1" [max]="10" [step]="1" [thumbLabel]="true" [(ngModel)]="dexterity">
+            </mat-slider>
+            <div>
+                Для ловких :)
+            </div>
+        </div>
+        <div>
+            Удача:
+            <mat-slider [min]="1" [max]="10" [step]="1" [thumbLabel]="true" [(ngModel)]="luck"
+                aria-labelledby="example-name-label">
+            </mat-slider>
+            <div>
+                Для сильных :)
+            </div>
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div>
     </mat-step>
 
     <mat-step>
@@ -65,9 +99,9 @@
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-raised-button (click)="createHero()">Создать</button>
-          </div>
+        </div>
     </mat-step>
-    
+
 </mat-stepper>
 
 <div>

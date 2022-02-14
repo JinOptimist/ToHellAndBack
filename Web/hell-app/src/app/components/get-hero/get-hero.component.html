@@ -8,7 +8,7 @@
 <div>
     <div>Герои что ищут богов</div>
     <div class="heroes-card">
-        <mat-card class="hero-card" *ngFor="let hero of savedHeroes">
+        <mat-card class="hero-card" *ngFor="let hero of savedHeroesNewV2 | async">
             <mat-card-title>{{hero.name}}</mat-card-title>
             <mat-card-subtitle>Класс</mat-card-subtitle>
             <mat-card-content>

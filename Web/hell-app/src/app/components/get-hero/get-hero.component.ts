@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IHero } from 'src/app/models/IHero';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { HeroService } from 'src/app/services/maze/HeroService';
@@ -17,14 +18,20 @@ export class GetHeroComponent implements OnInit {
 
   public savedHeroes: IHero[];
 
+  public savedHeroesNewV2: Observable<IHero[]>;
+
   constructor(
     private heroService: HeroService,
     private router: Router,
     private firebaseHelper: FirebaseHelper) { }
 
   ngOnInit(): void {
-    this.firebaseHelper.GetAllHeroes()
-      .then(h => this.savedHeroes = h);
+    this.savedHeroesNewV2 = this.firebaseHelper.getAllHeroes();
+
+    // this.firebaseHelper.getAllHeroes().subscribe(x =>
+    //   this.savedHeroes = x
+    // );
+    //.then(h => this.savedHeroes = h);
   }
 
   getHero() {

@@ -1,55 +1,55 @@
 import { IHero } from "../models/IHero";
 import { Injectable } from '@angular/core';
-import { initializeApp } from "firebase/app";
-import { Database, get, getDatabase, onValue, ref, remove, set } from "firebase/database";
 import { Action } from "rxjs/internal/scheduler/Action";
-import { from, Observable } from "rxjs";
+import { filter, from, map, Observable } from "rxjs";
+
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class FirebaseHelper {
-    private db: Database;
+    constructor(private firestore: Firestore) { }
 
-    constructor() {
-        this.db = getDatabase();
-    }
 
-    // GetHero(heroName: string): Observable<IHero> {
-    //     const refToCollection = ref(this.db, 'heroes/' + heroName);
-
-    //     new Observable();
-    //     const test = onValue(refToCollection, ()=>{});
-    //     test.apply(undefined);
-        
-    //     return;
-    // }
 
     GetHeroAsync(heroName: string): Promise<IHero> {
-        const refToCollection = ref(this.db, 'heroes/' + heroName);
-        return get(refToCollection).then(x => x.val() as IHero);;
+        // const refToCollection = ref(this.db, 'heroes/' + heroName);
+        // return get(refToCollection).then(x => x.val() as IHero);
+        return {} as Promise<IHero>;
     }
 
     SaveHero(hero: IHero): Promise<void> {
-        const refToCollection = ref(this.db, 'heroes/' + hero.name);
-        return set(refToCollection, hero);
+        const collectionHeroes = collection(this.firestore, 'heroes');
+        
+        // const refToCollection = ref(this.db, 'heroes/' + hero.name);
+        // return set(refToCollection, hero);
+        return {} as Promise<void>;
     }
 
     KillHero(heroName: string): void {
-        const refToCollection = ref(this.db, 'heroes/' + heroName);
-        remove(refToCollection);
+        // const refToCollection = ref(this.db, 'heroes/' + heroName);
+        // remove(refToCollection);
     }
 
-    GetAllHeroes(): Promise<IHero[]> {
-        const refToCollection = ref(this.db, 'heroes');
-        return get(refToCollection)
-            .then(data => {
-                const heroesAsObject = data.val();
-                return Object.keys(heroesAsObject)
-                    .map(name => heroesAsObject[name]) as IHero[];
-            });
+    getAllHeroes(): Observable<IHero[]> {
+        const collectionHeroes = collection(this.firestore, 'heroes');
+        const data = collectionData(collectionHeroes);
+        //const a = data.pipe(map(x => x.map(z => z.val())))
+        const answer = data as Observable<IHero[]>;
+        return answer;
     }
+
+    // GetAllHeroes(): Promise<IHero[]> {
+    //     const refToCollection = ref(this.db, 'heroes');
+    //     return get(refToCollection)
+    //         .then(data => {
+    //             const heroesAsObject = data.val();
+    //             return Object.keys(heroesAsObject)
+    //                 .map(name => heroesAsObject[name]) as IHero[];
+    //         });
+    // }
 }
 
 // SubscribeToUpdateHero (onHeroUpdate: (h: IHero) => void){

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { initializeApp } from "firebase/app"
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogPanelComponent } from './components/log-panel/log-panel.component';
@@ -23,10 +21,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { LevelResearchActionPanelComponent } from './components/level-research-action-panel/level-research-action-panel.component';
 import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
 import { EndOfLevelComponent } from './components/end-of-level/end-of-level.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -56,22 +57,22 @@ import { EndOfLevelComponent } from './components/end-of-level/end-of-level.comp
     MatCardModule,
     MatIconModule,
     MatRippleModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSliderModule,
+
+    provideFirebaseApp(() => initializeApp({
+      apiKey: "AIzaSyAfofIX36nawbTwCZdIGOBGq4jqlOvj5M4",
+      authDomain: "tohellandback-9df27.firebaseapp.com",
+      projectId: "tohellandback-9df27",
+      storageBucket: "tohellandback-9df27.appspot.com",
+      messagingSenderId: "683538521009",
+      appId: "1:683538521009:web:b0ee2ee365fb416d38bb90"
+    })),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  firebaseConfig = {
-    apiKey: "AIzaSyAfofIX36nawbTwCZdIGOBGq4jqlOvj5M4",
-    authDomain: "tohellandback-9df27.firebaseapp.com",
-    projectId: "tohellandback-9df27",
-    storageBucket: "tohellandback-9df27.appspot.com",
-    messagingSenderId: "683538521009",
-    appId: "1:683538521009:web:b0ee2ee365fb416d38bb90"
-  };
-
-  constructor() {
-    const app = initializeApp(this.firebaseConfig);
-  }
+  constructor() { }
 }

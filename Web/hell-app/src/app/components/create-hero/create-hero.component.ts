@@ -13,12 +13,16 @@ import { LevelOfFaith } from 'src/app/enum/LevelOfFaith';
 })
 export class CreateHeroComponent implements OnInit {
   heroName: string;
-  
+
   startCoinOptions: number[] = [270, 250, 150, 100, 50, 0];
   heroStartCoins: number = this.startCoinOptions[0];
 
   levelOfFaithOptions: LevelOfFaith[] = [LevelOfFaith.High, LevelOfFaith.Normal, LevelOfFaith.Low];
   levelOfFaith: LevelOfFaith = this.levelOfFaithOptions[0];
+
+  strength: number;
+  dexterity: number;
+  luck: number;
 
   error: string;
 
@@ -35,9 +39,9 @@ export class CreateHeroComponent implements OnInit {
       name: this.heroName,
       coins: this.heroStartCoins - 0,
       staminCostToAvoidRoom: 5,
-      strength: 10,
-      dexterity: 10,
-      luck: 10,
+      strength: this.strength,
+      dexterity: this.dexterity,
+      luck: this.luck,
       stamina: 300 - this.heroStartCoins,
       maxStamina: 300 - this.heroStartCoins,
       levelOfFaith: this.levelOfFaith
