@@ -18,6 +18,7 @@ export class LevelResearchActionPanelComponent implements OnInit {
   @Input() hero: IHero;
   rooms: BaseRooms[];
   currentLevel: IMazeLevel;
+  private timeAutoClick: number = 100;
 
   @ViewChildren(MatRipple) ripple: QueryList<MatRipple>;
   color: string = "red";
@@ -25,14 +26,14 @@ export class LevelResearchActionPanelComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private router: Router) { }
-
+    
   ngOnInit(): void {
     this.UpdateAvailableRooms();
 
     if (this.hero.levelOfFaith == LevelOfFaith.Low){
       setTimeout(() => {
         this.HeroChooseRandomRoom();
-      }, 500);
+      },this.timeAutoClick);
     }
   }
 
@@ -48,7 +49,7 @@ export class LevelResearchActionPanelComponent implements OnInit {
         if (this.rooms.length > 0) {
           setTimeout(() => {
             this.HeroChooseRandomRoom();
-          }, 500);
+          }, this.timeAutoClick);
         }
       }else{
         this.EndOfLevel(randomRoom);

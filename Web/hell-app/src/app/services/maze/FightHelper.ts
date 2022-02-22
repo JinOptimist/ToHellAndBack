@@ -14,7 +14,9 @@ export class FightHelper {
     fightAgainstEnemies(hero: IHero, enemies: IEnemy[]){
         this.gameEventsService.addHeroPhrase(hero, `Да тут ${enemies.length} гоблинов. Надеюсь справлюсь`);
 
+        let roundNumber = 1;
         while (enemies.length > 0) {
+            this.gameEventsService.addSystemMessage(`Раунд ${roundNumber}`);
             for (let index = 0; index < enemies.length; index++) {
                 const goblin = enemies[index];
                 const stillALive = this.fightRound(hero, goblin);
@@ -24,6 +26,7 @@ export class FightHelper {
                     index--;
                 }
             }
+            roundNumber++;
         }
     }
 
