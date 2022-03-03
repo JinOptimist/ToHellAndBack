@@ -1,7 +1,7 @@
 <mat-stepper linear #stepper>
     <mat-step>
         <ng-template matStepLabel>
-            Имя героя 
+            Имя героя
             <span *ngIf="!!heroName">
                 "{{heroName}}"
             </span>
@@ -12,7 +12,7 @@
         </mat-form-field>
         <div>
             <button mat-button matStepperNext>Дальше</button>
-          </div>
+        </div>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Стартовый капитал</ng-template>
@@ -29,7 +29,7 @@
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
-          </div>
+        </div>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Уровень веры</ng-template>
@@ -48,9 +48,53 @@
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
-          </div>
+        </div>
     </mat-step>
-
+    <mat-step>
+        <ng-template matStepLabel>Характеристики</ng-template>
+        <div>
+            <div>
+                Свободных Характеристик: {{freeStat}}
+            </div>
+            <div class="strength">
+                <div>
+                    Для сильных :)
+                </div>
+                Сила {{strength}}:
+                <button mat-button (click)="minusStat('strength')" [disabled]="strength <= 1">-</button>
+                <mat-slider [min]="1" [max]="maxStrength" [step]="1" [thumbLabel]="true" [(ngModel)]="strength"
+                    [disabled]="true">
+                </mat-slider>
+                <button mat-button (click)="addStat('strength')" [disabled]="strength >= maxStrength">+</button>
+            </div>
+            <div>
+                <div>
+                    Для ловких :)
+                </div>
+                Ловкость {{dexterity}}:
+                <button mat-button (click)="minusStat('dexterity')" [disabled]="dexterity <= 1">-</button>
+                <mat-slider [min]="1" [max]="maxDexterity" [step]="1" [thumbLabel]="true" [(ngModel)]="dexterity"
+                    [disabled]="true">
+                </mat-slider>
+                <button mat-button (click)="addStat('dexterity')" [disabled]="dexterity >= maxDexterity">+</button>
+            </div>
+            <div>
+                <div>
+                    Для удачливых :)
+                </div>
+                Удача {{luck}}:
+                <button mat-button (click)="minusStat('luck')" [disabled]="luck <= 1">-</button>
+                <mat-slider [min]="1" [max]="maxLuck" [step]="1" [thumbLabel]="true" [(ngModel)]="luck"
+                    [disabled]="true">
+                </mat-slider>
+                <button mat-button (click)="addStat('luck')" [disabled]="luck >= maxLuck">+</button>
+            </div>
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
     <mat-step>
         <ng-template matStepLabel>Проверка</ng-template>
         <div>
@@ -63,11 +107,25 @@
             Вера: {{levelOfFaith}}
         </div>
         <div>
+            <div>
+                Характеристики
+            </div>
+            <div>
+                Сила: {{strength}}
+            </div>
+            <div>
+                Ловкость: {{dexterity}}
+            </div>
+            <div>
+                Удача: {{luck}}
+            </div>
+        </div>
+        <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-raised-button (click)="createHero()">Создать</button>
-          </div>
+        </div>
     </mat-step>
-    
+
 </mat-stepper>
 
 <div>
