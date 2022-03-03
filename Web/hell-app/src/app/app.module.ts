@@ -28,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { LevelResearchActionPanelComponent } from './components/level-research-action-panel/level-research-action-panel.component';
 import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
 import { EndOfLevelComponent } from './components/end-of-level/end-of-level.component';
+import { FightComponent } from './components/fight/fight.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { EndOfLevelComponent } from './components/end-of-level/end-of-level.comp
     DeadComponent,
     LevelResearchActionPanelComponent,
     LeaveFromDungeonComponent,
-    EndOfLevelComponent
+    EndOfLevelComponent,
+    FightComponent
   ],
   imports: [
     BrowserModule,

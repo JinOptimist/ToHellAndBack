@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MazeStatus } from "src/app/enum/MazeStatus";
 import { IEnemy } from "src/app/models/enemies/IEnemy";
 import { IHero } from "src/app/models/IHero";
 import { ICharacteristics } from "../../models/ICharacteristics";
@@ -9,24 +10,34 @@ import { GameEventsService } from "../GameEventsService";
 })
 
 export class FightHelper {
+    public GoblinCoins: number = 2;
     constructor(private gameEventsService: GameEventsService) { }
 
-    fightAgainstEnemies(hero: IHero, enemies: IEnemy[]){
+    fightAgainstEnemiesAutoBatle(hero: IHero, enemies: IEnemy[]) {
         this.gameEventsService.addHeroPhrase(hero, `Да тут ${enemies.length} гоблинов. Надеюсь справлюсь`);
 
-        let roundNumber = 1;
         while (enemies.length > 0) {
-            this.gameEventsService.addSystemMessage(`Раунд ${roundNumber}`);
-            for (let index = 0; index < enemies.length; index++) {
-                const goblin = enemies[index];
-                const stillALive = this.fightRound(hero, goblin);
-                if (!stillALive) {
-                    this.gameEventsService.addHeroPhrase(hero, `Наконец я убил этого ${goblin.name}`);
-                    enemies.splice(index, 1);
-                    index--;
-                }
+            this.fightRoundWithAllEnemies(hero, enemies);
+        }
+    }
+
+    fightRoundWithAllEnemies(hero: IHero, enemies: IEnemy[]) {
+        this.gameEventsService.addHeroPhrase(hero, `${enemies.length} противников. Надеюсь справлюсь`);
+
+        for (let index = 0; index < enemies.length; index++) {
+            const goblin = enemies[index];
+            const stillALive = this.fightRound(hero, goblin);
+            if (!stillALive) {
+                this.gameEventsService.addHeroPhrase(hero, `Наконец я убил этого ${goblin.name}`);
+                enemies.splice(index, 1);
+                index--;
+                hero.coins += this.GoblinCoins;
             }
-            roundNumber++;
+        }
+
+        if (enemies.length <= 0){
+            hero.maze.status = MazeStatus.InProgress;
+            hero.maze.levels[hero.maze.heroCurrentLevelNumber].activeRoom = null;
         }
     }
 

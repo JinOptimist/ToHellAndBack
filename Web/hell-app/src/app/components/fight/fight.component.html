@@ -1,0 +1,13 @@
+<div>Fight!</div>
+<div>
+    enemies:
+    <span *ngFor="let enemy of enemies">
+        {{enemy.name}} [{{enemy.stamina}}/{{enemy.maxStamina}}]
+    </span>
+</div>
+<div>
+    <button mat-raised-button  (click)="atack()">Атаковать</button>
+</div>
+<div>
+    win
+</div>

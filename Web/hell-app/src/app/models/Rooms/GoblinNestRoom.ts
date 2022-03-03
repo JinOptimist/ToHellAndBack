@@ -8,8 +8,9 @@ export class GoblinNestRoom extends BaseRooms {
     roomName: string;
     roomDesc: string;
 
-    constructor(public goblins: IEnemy[]) {
+    constructor(goblins: IEnemy[]) {
         super();
+        this.enemies = goblins;
 
         this.roomName = `Гнездо гоблинов (+${goblins.length})`;
 

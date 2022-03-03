@@ -16,6 +16,7 @@ export class GameComponent implements OnInit {
   roomsLeft: number;
   CompleteValue: MazeStatus = MazeStatus.Complete;
   InProgressValue: MazeStatus = MazeStatus.InProgress;
+  InFight: MazeStatus = MazeStatus.InFight;
 
   constructor(private heroService: HeroService) { }
 
