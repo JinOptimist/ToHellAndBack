@@ -4,14 +4,17 @@ import { IEnemy } from "src/app/models/enemies/IEnemy";
 import { IHero } from "src/app/models/IHero";
 import { ICharacteristics } from "../../models/ICharacteristics";
 import { GameEventsService } from "../GameEventsService";
+import { RandomService } from "../RandomService";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class FightHelper {
-    public GoblinCoins: number = 2;
-    constructor(private gameEventsService: GameEventsService) { }
+    public PercentRandomSpan: number = 5;
+    constructor(
+        private gameEventsService: GameEventsService,
+        private randomService: RandomService) { }
 
     fightAgainstEnemiesAutoBatle(hero: IHero, enemies: IEnemy[]) {
         this.gameEventsService.addHeroPhrase(hero, `Да тут ${enemies.length} гоблинов. Надеюсь справлюсь`);
@@ -25,17 +28,17 @@ export class FightHelper {
         this.gameEventsService.addHeroPhrase(hero, `${enemies.length} противников. Надеюсь справлюсь`);
 
         for (let index = 0; index < enemies.length; index++) {
-            const goblin = enemies[index];
-            const stillALive = this.fightRound(hero, goblin);
-            if (!stillALive) {
-                this.gameEventsService.addHeroPhrase(hero, `Наконец я убил этого ${goblin.name}`);
+            const enemy = enemies[index];
+            const enemyStillALive = this.fightRound(hero, enemy);
+            if (!enemyStillALive) {
+                this.gameEventsService.addHeroPhrase(hero, `Наконец я убил этого ${enemy.name} и нашёл у него ${enemy.rewardCoins} монет`);
+                hero.coins += enemy.rewardCoins;
                 enemies.splice(index, 1);
                 index--;
-                hero.coins += this.GoblinCoins;
             }
         }
 
-        if (enemies.length <= 0){
+        if (enemies.length <= 0) {
             hero.maze.status = MazeStatus.InProgress;
             hero.maze.levels[hero.maze.heroCurrentLevelNumber].activeRoom = null;
         }
@@ -56,12 +59,14 @@ export class FightHelper {
     }
 
     private attack(attacker: ICharacteristics, attackerName: string, defender: ICharacteristics, defenderName: string) {
-
         const random = Math.random();
         const isAttackerFatser = attacker.dexterity > defender.dexterity;
-        const chanseToHit = isAttackerFatser
+
+        let chanseToHit = isAttackerFatser
             ? defender.dexterity / attacker.dexterity
             : 1 - attacker.dexterity / defender.dexterity;
+        const spanRandom = this.randomService.getRandomPercent(this.PercentRandomSpan);
+        chanseToHit += spanRandom;
 
         const isHitted = random < chanseToHit;
 

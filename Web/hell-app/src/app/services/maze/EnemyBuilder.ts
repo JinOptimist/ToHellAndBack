@@ -14,7 +14,8 @@ export class EnemyBuilder {
             1, 2, //strength
             6, 9, //dexterity
             2, 3, //luck
-            10, 15 //stamina
+            10, 15, //stamina
+            1, 3
         );
         goblin.name = `${this.getRandonFromArray(this.epithets)} гоблин`;
         return goblin;
@@ -28,12 +29,15 @@ export class EnemyBuilder {
         luckMin: number,
         luckMax: number,
         staminaMin: number,
-        staminaMax: number,): IEnemy {
+        staminaMax: number,
+        rewardCoinsMin: number,
+        rewardCoinsMax: number,): IEnemy {
         const enemy = {
             strength: this.getRandomInt(strengthMin, strengthMax),
             dexterity: this.getRandomInt(dexterityMin, dexterityMax),
             luck: this.getRandomInt(luckMin, luckMax),
             stamina: this.getRandomInt(staminaMin, staminaMax),
+            rewardCoins: this.getRandomInt(rewardCoinsMin, rewardCoinsMax),
         } as IEnemy;
         enemy.maxStamina = enemy.stamina;
 

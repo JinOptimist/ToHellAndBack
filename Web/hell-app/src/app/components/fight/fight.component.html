@@ -6,8 +6,6 @@
     </span>
 </div>
 <div>
-    <button mat-raised-button  (click)="atack()">Атаковать</button>
-</div>
-<div>
-    win
+    <button mat-raised-button matRipple [matRippleCentered]="false" [matRippleUnbounded]="true"
+        [matRippleRadius]="50" [matRippleColor]="'red'" (click)="atack()">Атаковать</button>
 </div>

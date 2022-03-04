@@ -13,7 +13,7 @@
                 (click)="CheckRoom(room)">Исследовать</button>
             <button *ngIf="IsNotExit(room)" mat-raised-button (click)="GetAroundRoom(room)">Обойти стороной</button>
             <button *ngIf="!IsNotExit(room)" matRipple [matRippleCentered]="false" [matRippleUnbounded]="true"
-                [matRippleRadius]="50" [matRippleColor]="color" mat-raised-button
+                [matRippleRadius]="50" [matRippleColor]="'red'" mat-raised-button
                 (click)="EndOfLevel(room)">Отдохнуть</button>
         </mat-card-actions>
     </mat-card>
