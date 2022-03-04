@@ -59,7 +59,7 @@ export class FightHelper {
     }
 
     private attack(attacker: ICharacteristics, attackerName: string, defender: ICharacteristics, defenderName: string) {
-        const random = Math.random();
+        const randomFrom1To100 = this.randomService.getRandomInt(1, 100) / 100;
         const isAttackerFatser = attacker.dexterity > defender.dexterity;
 
         let chanseToHit = isAttackerFatser
@@ -67,10 +67,10 @@ export class FightHelper {
             : 1 - attacker.dexterity / defender.dexterity;
         const spanRandom = this.randomService.getRandomPercent(this.PercentRandomSpan);
         chanseToHit += spanRandom;
+        chanseToHit = Math.round(chanseToHit * 100) / 100;
+        const isHitted = randomFrom1To100 < chanseToHit;
 
-        const isHitted = random < chanseToHit;
-
-        this.gameEventsService.addSystemMessage(`Бросок кубика ${random}. Шанс на удар ${chanseToHit}`);
+        this.gameEventsService.addSystemMessage(`Бросок кубика ${randomFrom1To100}. Шанс на удар ${chanseToHit} A:${attacker.dexterity} D:${defender.dexterity}`);
 
         if (isHitted) {
             defender.stamina -= attacker.strength;

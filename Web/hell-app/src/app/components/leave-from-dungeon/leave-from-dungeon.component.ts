@@ -22,7 +22,15 @@ export class LeaveFromDungeonComponent implements OnInit {
     this.spendMoney = Math.round(this.hero.coins / 2);
     this.staminaIncrease = Math.round(this.spendMoney / 2);
 
-    this.hero.maxStamina += this.staminaIncrease;
+    if (this.spendMoney > 30){
+      const statGrowing =  Math.round(this.spendMoney / 30);
+      this.hero.strength += statGrowing;
+      this.hero.luck += statGrowing;
+      this.hero.dexterity += statGrowing;
+    }else{
+      this.hero.maxStamina += this.staminaIncrease;
+    }
+    
     this.hero.coins -= this.spendMoney;
     this.hero.stamina = this.hero.maxStamina;
     this.hero.maze = this.mazeBuilder.BuildMaze(this.hero);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LevelOfFaith } from 'src/app/enum/LevelOfFaith';
 import { IHero } from 'src/app/models/IHero';
 import { FirebaseHelper } from 'src/app/services/FirebaseHelper';
 import { HeroService } from 'src/app/services/maze/HeroService';
@@ -13,7 +14,9 @@ import { HeroService } from 'src/app/services/maze/HeroService';
 export class GetHeroComponent implements OnInit {
   public heroName: string = "Conan";
   public error: string;
-  //public password!: string;
+  public FaithLow: LevelOfFaith = LevelOfFaith.Low;
+  public FaithNormal: LevelOfFaith = LevelOfFaith.Normal;
+  public FaithHigh: LevelOfFaith = LevelOfFaith.High;
 
   public savedHeroes: IHero[];
 

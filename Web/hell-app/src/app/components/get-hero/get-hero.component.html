@@ -10,16 +10,26 @@
     <div class="heroes-card">
         <mat-card class="hero-card" *ngFor="let hero of savedHeroes">
             <mat-card-title>{{hero.name}}</mat-card-title>
-            <mat-card-subtitle>Класс</mat-card-subtitle>
+            <mat-card-subtitle>
+                Сила веры: 
+                <span *ngIf="hero.levelOfFaith == FaithLow">Атеист</span>
+                <span *ngIf="hero.levelOfFaith == FaithNormal">Средняя</span>
+                <span *ngIf="hero.levelOfFaith == FaithHigh">Фанатик</span>
+            </mat-card-subtitle>
             <mat-card-content>
                 <div class="coins">
                     <mat-icon>monetization_on</mat-icon> {{hero.coins}}
-                    Dungeon: {{hero.maze.heroCurrentLevelNumber}}
                 </div>
                 <div>
-                    <span>Выносливость: [{{hero.stamina}} / {{hero.maxStamina}}]</span>
+                    Остановился на {{hero.maze.heroCurrentLevelNumber}} уровне
+                </div>
+                <div>
+                    <div>Выносливость: [{{hero.stamina}} / {{hero.maxStamina}}]</div>
                     <mat-progress-bar mode="determinate" [value]="hero.stamina / hero.maxStamina * 100">
                     </mat-progress-bar>
+                    <div>Сила: {{hero.strength}}</div>
+                    <div>Ловкость: {{hero.dexterity}}</div>
+                    <div>Удача: {{hero.luck}}</div>
                 </div>
             </mat-card-content>
             <mat-card-actions>

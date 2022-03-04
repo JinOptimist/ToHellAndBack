@@ -11,6 +11,15 @@
     <div class="info-block coins">
         Золото: <span class="value">{{ hero.coins }}</span>
     </div>
+    <div class="info-block coins">
+        Сила: <span class="value">{{ hero.strength }}</span>
+    </div>
+    <div class="info-block coins">
+        Ловкость <span class="value">{{ hero.dexterity }}</span>
+    </div>
+    <div class="info-block coins">
+        Удача: <span class="value">{{ hero.luck }}</span>
+    </div>
 </div>
 <div class="status-bar" *ngIf="(!!hero.maze) && hero.maze.status == InProgressValue">
     <div class="info-block">
