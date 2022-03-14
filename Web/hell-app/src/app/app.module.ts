@@ -28,6 +28,8 @@ import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave
 import { EndOfLevelComponent } from './components/end-of-level/end-of-level.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { FightComponent } from './components/fight/fight.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     DeadComponent,
     LevelResearchActionPanelComponent,
     LeaveFromDungeonComponent,
-    EndOfLevelComponent
+    EndOfLevelComponent,
+    FightComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

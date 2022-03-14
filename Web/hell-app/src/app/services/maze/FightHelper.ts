@@ -1,29 +1,46 @@
 import { Injectable } from "@angular/core";
+import { MazeStatus } from "src/app/enum/MazeStatus";
 import { IEnemy } from "src/app/models/enemies/IEnemy";
 import { IHero } from "src/app/models/IHero";
 import { ICharacteristics } from "../../models/ICharacteristics";
 import { GameEventsService } from "../GameEventsService";
+import { RandomService } from "../RandomService";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class FightHelper {
-    constructor(private gameEventsService: GameEventsService) { }
+    public PercentRandomSpan: number = 5;
+    constructor(
+        private gameEventsService: GameEventsService,
+        private randomService: RandomService) { }
 
-    fightAgainstEnemies(hero: IHero, enemies: IEnemy[]){
+    fightAgainstEnemiesAutoBatle(hero: IHero, enemies: IEnemy[]) {
         this.gameEventsService.addHeroPhrase(hero, `Да тут ${enemies.length} гоблинов. Надеюсь справлюсь`);
 
         while (enemies.length > 0) {
-            for (let index = 0; index < enemies.length; index++) {
-                const goblin = enemies[index];
-                const stillALive = this.fightRound(hero, goblin);
-                if (!stillALive) {
-                    this.gameEventsService.addHeroPhrase(hero, `Наконец я убил этого ${goblin.name}`);
-                    enemies.splice(index, 1);
-                    index--;
-                }
+            this.fightRoundWithAllEnemies(hero, enemies);
+        }
+    }
+
+    fightRoundWithAllEnemies(hero: IHero, enemies: IEnemy[]) {
+        this.gameEventsService.addHeroPhrase(hero, `${enemies.length} противников. Надеюсь справлюсь`);
+
+        for (let index = 0; index < enemies.length; index++) {
+            const enemy = enemies[index];
+            const enemyStillALive = this.fightRound(hero, enemy);
+            if (!enemyStillALive) {
+                this.gameEventsService.addHeroPhrase(hero, `Наконец я убил этого ${enemy.name} и нашёл у него ${enemy.rewardCoins} монет`);
+                hero.coins += enemy.rewardCoins;
+                enemies.splice(index, 1);
+                index--;
             }
+        }
+
+        if (enemies.length <= 0) {
+            hero.maze.status = MazeStatus.InProgress;
+            hero.maze.levels[hero.maze.heroCurrentLevelNumber].activeRoom = null;
         }
     }
 
@@ -42,16 +59,18 @@ export class FightHelper {
     }
 
     private attack(attacker: ICharacteristics, attackerName: string, defender: ICharacteristics, defenderName: string) {
-
-        const random = Math.random();
+        const randomFrom1To100 = this.randomService.getRandomInt(1, 100) / 100;
         const isAttackerFatser = attacker.dexterity > defender.dexterity;
-        const chanseToHit = isAttackerFatser
+
+        let chanseToHit = isAttackerFatser
             ? defender.dexterity / attacker.dexterity
             : 1 - attacker.dexterity / defender.dexterity;
+        const spanRandom = this.randomService.getRandomPercent(this.PercentRandomSpan);
+        chanseToHit += spanRandom;
+        chanseToHit = Math.round(chanseToHit * 100) / 100;
+        const isHitted = randomFrom1To100 < chanseToHit;
 
-        const isHitted = random < chanseToHit;
-
-        this.gameEventsService.addSystemMessage(`Бросок кубика ${random}. Шанс на удар ${chanseToHit}`);
+        this.gameEventsService.addSystemMessage(`Бросок кубика ${randomFrom1To100}. Шанс на удар ${chanseToHit} A:${attacker.dexterity} D:${defender.dexterity}`);
 
         if (isHitted) {
             defender.stamina -= attacker.strength;

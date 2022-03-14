@@ -6,16 +6,19 @@ import { EndOfLevelComponent } from './components/end-of-level/end-of-level.comp
 import { GameComponent } from './components/game/game.component';
 import { GetHeroComponent } from './components/get-hero/get-hero.component';
 import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
+import { LoginComponent } from './components/login/login.component';
 import { GameGuard } from './services/GameGuard';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+
   { path: 'getHero', component: GetHeroComponent },
   { path: 'createHero', component: CreateHeroComponent },
   { path: 'game', component: GameComponent, canActivate: [GameGuard] },
   { path: 'dead', component: DeadComponent },
   { path: 'leave-from-dungeon', component: LeaveFromDungeonComponent },
   { path: 'end-of-level', component: EndOfLevelComponent, canActivate: [GameGuard] },
-  { path: '', component: GetHeroComponent },
+  { path: '', component: LoginComponent },
 ];
 
 @NgModule({

@@ -36,11 +36,12 @@ export class MazeBuilder {
     }
 
     private BuildLevel(level: number, isLastLevel: boolean = false): IMazeLevel {
-        const mazeLevel = <IMazeLevel>{
+        const mazeLevel = {
             level: level,
             defense: 0,
-            rooms: []
-        };
+            rooms: [],
+            activeRoom: null
+        } as IMazeLevel;
 
         const roomCount = level * 3;
         for (let i = 0; i < roomCount; i++) {
@@ -66,6 +67,6 @@ export class MazeBuilder {
             mazeLevel.rooms.push(new StairsDown());
         }
 
-        return mazeLevel
+        return mazeLevel;
     }
 }

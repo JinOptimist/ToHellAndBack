@@ -1,5 +1,6 @@
 export enum MazeStatus {
     GeneratedAndNotStarted = 1,
     InProgress = 2,
-    Complete = 3
+    Complete = 3,
+    InFight = 4,
 }

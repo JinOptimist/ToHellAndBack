@@ -113,13 +113,16 @@ export class RoomService {
     }
 
     private CheckGoblinNestRoom(room: GoblinNestRoom, hero: IHero, currentLevel: IMazeLevel) {
-        const goblinCount = room.goblins.length;
-        
-        this.fightHelper.fightAgainstEnemies(hero, room.goblins);
+        currentLevel.activeRoom = room;
+        hero.maze.status = MazeStatus.InFight;
 
-        this.gameEventsService.addHeroPhrase(hero, `С каждого гоблина по две монеты. Неплохо`);
-        hero.coins += goblinCount * 2;
-        currentLevel.defense += goblinCount;
+        // const goblinCount = room.goblins.length;
+        
+        // this.fightHelper.fightAgainstEnemies(hero, room.goblins);
+
+        // this.gameEventsService.addHeroPhrase(hero, `С каждого гоблина по две монеты. Неплохо`);
+        // hero.coins += goblinCount * 2;
+        // currentLevel.defense += goblinCount;
     }
 
     private CheckTreasuryRoom(room: TreasuryRoom, hero: IHero) {

@@ -1,5 +1,6 @@
 .heroes-card{
     display: flex;
+    flex-wrap: wrap;
     .hero-card{
         width: 200px;
         margin: 5px;
@@ -7,6 +8,11 @@
         .coins{
             display: flex;
             align-items: flex-end;
+        }
+
+        .mat-card-actions{
+            display: flex;
+            justify-content: space-between;
         }
     }
 }
