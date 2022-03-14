@@ -1,6 +1,5 @@
 import { LevelOfFaith } from "../enum/LevelOfFaith";
 import { ICharacteristics } from "./ICharacteristics";
-import { IMaze } from "./IMaze";
 
 export interface IHero extends ICharacteristics {
     name: string;
@@ -8,6 +7,4 @@ export interface IHero extends ICharacteristics {
     staminCostToAvoidRoom: number;
 
     levelOfFaith: LevelOfFaith;
-
-    maze: IMaze;
 }

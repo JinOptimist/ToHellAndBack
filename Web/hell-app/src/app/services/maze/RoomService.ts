@@ -10,8 +10,8 @@ import { GoblinNestRoom } from "src/app/models/Rooms/GoblinNestRoom";
 import { StairsDown } from "src/app/models/Rooms/StairsDown";
 import { TreasuryRoom } from "src/app/models/Rooms/TreasuryRoom";
 import { GameEventsService } from "../GameEventsService";
+import { HeroRepository } from "../repositories/HeroRepository";
 import { FightHelper } from "./FightHelper";
-import { HeroService } from "./HeroService";
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +22,7 @@ export class RoomService {
 
     constructor(
         private gameEventsService: GameEventsService,
-        private heroService: HeroService,
+        private heroRepository: HeroRepository,
         private fightHelper: FightHelper,
         private router: Router
     ) { }
@@ -70,7 +70,7 @@ export class RoomService {
     }
 
     private RemoveRoomInvestigatedRoomAndSaveProgress(room: BaseRooms, hero: IHero, currentLevel: IMazeLevel) {
-        this.heroService.HeroWasUpdated(hero);
+        this.HeroWasUpdated(hero);
 
         const index = currentLevel.rooms.indexOf(room, 0);
         if (index > -1) {
@@ -87,7 +87,7 @@ export class RoomService {
         }
 
         //!!!!!!!!!! Save progress
-        this.heroService.SaveCurrentHero();
+        this.heroRepository.Update(hero);
     }
 
     private ShuffleRooms(rooms: BaseRooms[]) {
@@ -132,5 +132,13 @@ export class RoomService {
 
     private CheckStairsDown(room: StairsDown, hero: IHero) {
         hero.maze.heroCurrentLevelNumber++;
+    }
+
+    public HeroWasUpdated(hero: IHero): void {
+        //check for death
+        if (hero.stamina <= 0) {
+            this.heroRepository.Delete(hero);
+            this.router.navigateByUrl('/dead');
+        }
     }
 }

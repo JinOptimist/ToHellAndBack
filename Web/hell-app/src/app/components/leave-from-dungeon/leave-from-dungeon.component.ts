@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IHero } from 'src/app/models/IHero';
-import { HeroService } from 'src/app/services/maze/HeroService';
 import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
+import { HeroRepository } from 'src/app/services/repositories/HeroRepository';
 
 @Component({
   selector: 'app-leave-from-dungeon',
@@ -9,16 +9,15 @@ import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
   styleUrls: ['./leave-from-dungeon.component.scss']
 })
 export class LeaveFromDungeonComponent implements OnInit {
-  hero: IHero;
+  @Input() hero: IHero;
   spendMoney: number;
   staminaIncrease: number;
 
   constructor(
-    private heroService: HeroService,
+    private heroRepository: HeroRepository,
     private mazeBuilder: MazeBuilder) { }
 
   ngOnInit(): void {
-    this.hero = this.heroService.GetCurrentHero();
     this.spendMoney = Math.round(this.hero.coins / 2);
     this.staminaIncrease = Math.round(this.spendMoney / 2);
 
@@ -34,6 +33,6 @@ export class LeaveFromDungeonComponent implements OnInit {
     this.hero.coins -= this.spendMoney;
     this.hero.stamina = this.hero.maxStamina;
     this.hero.maze = this.mazeBuilder.BuildMaze(this.hero);
-    this.heroService.SaveCurrentHero();
+    this.heroRepository.Update(this.hero);
   }
 }

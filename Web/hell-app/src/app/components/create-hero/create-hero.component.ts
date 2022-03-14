@@ -3,8 +3,8 @@ import { IHero } from 'src/app/models/IHero';
 import { HeroService } from 'src/app/services/maze/HeroService';
 import { Router } from '@angular/router';
 import { LevelOfFaith } from 'src/app/enum/LevelOfFaith';
-import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
 import { MatSliderChange } from '@angular/material/slider';
+import { MazeBuilder } from 'src/app/services/maze/MazeBuilder';
 
 @Component({
   selector: 'app-create-hero',
@@ -56,12 +56,12 @@ export class CreateHeroComponent implements OnInit {
       maxStamina: 300 - this.heroStartCoins,
       levelOfFaith: this.levelOfFaith
     };
-    hero.maze = this.mazeBuilder.BuildMaze(hero);
+
     this.heroService
-      .CreateHero(hero)
-      .then(() => {
-        this.router.navigateByUrl("/game");
-      });
+      .CreateHero(hero);
+
+    const maze = this.mazeBuilder.BuildMaze(hero);
+    this.router.navigateByUrl("/game")
   }
 
   addStat(statName: string) {
@@ -101,7 +101,7 @@ export class CreateHeroComponent implements OnInit {
 
     this.updateMaxStat();
   }
-  
+
   updateMaxStat() {
     this.freeStat = this.initialFreeStat - this.strength - this.dexterity - this.luck;
     this.maxStrength = this.getMaxStat(this.strength);
