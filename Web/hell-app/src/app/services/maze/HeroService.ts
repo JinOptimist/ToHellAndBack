@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { IHero } from "../../models/IHero";
 import { FirebaseHelper } from "../FirebaseHelper";
+import { FireStoreHelper } from "../FireStoreHelper";
 import { IHeroObserver } from "./IHeroObserver";
 
 @Injectable({
@@ -13,9 +14,12 @@ export class HeroService implements IHeroObserver {
 
     constructor(
         private firebaseHelper: FirebaseHelper,
+        private fireStoreHelper: FireStoreHelper,
         private router: Router) { }
 
     public CreateHero(hero: IHero): Promise<void> {
+        this.fireStoreHelper.CreateHero(hero);
+        
         return this.firebaseHelper
             .SaveHero(hero)
             .then(() => {
@@ -45,7 +49,8 @@ export class HeroService implements IHeroObserver {
             throw new Error("We try to save hero before we read it");
         }
 
-        this.firebaseHelper.SaveHero(this.hero);
+        //this.firebaseHelper.SaveHero(this.hero);
+        this.fireStoreHelper.SaveHero(this.hero);
     }
 
     public HeroWasUpdated(hero: IHero): void {
