@@ -29,6 +29,7 @@ import { LevelResearchActionPanelComponent } from './components/level-research-a
 import { LeaveFromDungeonComponent } from './components/leave-from-dungeon/leave-from-dungeon.component';
 import { EndOfLevelComponent } from './components/end-of-level/end-of-level.component';
 import { FightComponent } from './components/fight/fight.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FightComponent } from './components/fight/fight.component';
     LevelResearchActionPanelComponent,
     LeaveFromDungeonComponent,
     EndOfLevelComponent,
-    FightComponent
+    FightComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
